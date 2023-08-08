@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ProductImage from "../ProductImage/ProductImage";
 
 interface IHeroProduct {
@@ -15,14 +16,23 @@ const HeroProduct = ({
   images,
   price,
 }: IHeroProduct) => {
+  const [currentImageIdx, setCurrentImageIdx] = useState(0);
+
   return (
     <section key={id} className="border border-red-400 p-2">
-      <ProductImage hero title={title} image={images[0]} />
       <div className="flex gap-x-2">
-        <ProductImage title={title} image={images[1]} />
-        <ProductImage title={title} image={images[2]} />
-        <ProductImage title={title} image={images[3]} />
-        <ProductImage title={title} image={images[4]} />
+        <ProductImage hero title={title} image={images[currentImageIdx]} />
+        <div className="flex flex-col gap-1">
+          {images.map((image, i) => (
+            <ProductImage
+              key={image.node.id}
+              title={title}
+              image={image}
+              action={() => setCurrentImageIdx(i)}
+              active={i === currentImageIdx}
+            />
+          ))}
+        </div>
       </div>
       <aside>
         <h2>{title}</h2>

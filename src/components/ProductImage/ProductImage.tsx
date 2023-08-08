@@ -2,7 +2,7 @@ import Image from "next/image";
 
 interface IProductImage {
   /**
-   * title provides failover incase image has null or empty altText property
+   * title provides failover incase image has null or empty altText property.
    */
   title: string;
   image: { node: { id: string; altText?: string; originalSrc: string } };
@@ -12,6 +12,11 @@ interface IProductImage {
   hero?: boolean;
   height?: number;
   width?: number;
+  /**
+   * when active, a low opacity screen fades in.
+   */
+  active?: boolean;
+  action?: () => void;
 }
 
 const ProductImage = ({
@@ -20,14 +25,39 @@ const ProductImage = ({
   height = 100,
   width = 100,
   hero,
+  active,
+  action,
 }: IProductImage) => {
   return (
-    <div>
+    <div
+      className={`
+        relative
+        border
+        cursor-pointer
+        shadow-md
+        h-fit
+        transition
+        duration-200
+        ${active ? "border-black/30" : "border-slate-100"}
+      `}
+      onClick={action}
+    >
+      {/* screen */}
+      <div
+        className={`
+          absolute 
+          h-full 
+          w-full 
+          transition
+          duration-200
+          ${active ? "bg-black/30" : "bg-black/0"}
+        `}
+      />
+      {/* image */}
       <Image
-        className="border border-slate-100 shadow-md"
         src={image.node.originalSrc}
-        height={hero ? 650 : height}
-        width={hero ? 350 : width}
+        height={hero ? 1000 : height}
+        width={hero ? 500 : width}
         alt={`${image.node.altText || title}`}
       />
     </div>
