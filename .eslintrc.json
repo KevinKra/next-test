@@ -33,6 +33,11 @@
       { "checksVoidReturn": { "attributes": false } }
     ]
   },
-  "ignorePatterns": ["*.config.js", "next.config.js", "**/*.d.ts"],
+  "ignorePatterns": [
+    "*.config.js",
+    "next.config.js",
+    "**/*.d.ts",
+    "lintstagedrc.js"
+  ],
   "overrides": []
 }
