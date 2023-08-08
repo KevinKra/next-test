@@ -10,12 +10,18 @@ export default function Home({ products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {products.edges.map(({ node }) => (
-        <p key={node.id}>{node.title}</p>
-      ))}
-
-      <main className="flex text-red-400 flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        render a product here.
+      <main className="">
+        <section className="flex flex-col gap-y-4 rounded-sm">
+          {products.edges.map(({ node }) => (
+            <div
+              key={node.id}
+              className="flex shadow-sm p-4 w-[15rem] gap-y-4 flex-col border items-center"
+            >
+              <h2 className="font-medium">{node.title}</h2>
+              <p className="text-sm line-clamp-4">{node.description}</p>
+            </div>
+          ))}
+        </section>
       </main>
 
       <footer className="flex items-center justify-center w-full h-24 border-t">
@@ -29,11 +35,17 @@ const gql = String.raw;
 
 const PRODUCTS_QUERY = gql`
   query products {
-    products(first: 3) {
+    products(first: 5) {
       edges {
         node {
           id
           title
+          description
+          featuredImage {
+            src
+            id
+            altText
+          }
         }
       }
     }
