@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProductImage from "../ProductImage/ProductImage";
+import Button from "../_atoms/Button/Button";
 
 interface IHeroProduct {
   id: string;
@@ -41,7 +42,7 @@ const HeroProduct = ({
   return (
     <section
       key={id}
-      className="grid grid-cols-1 gap-4 sm:grid-cols-2 border-red-400"
+      className="grid grid-cols-1 gap-6 sm:gap-12 sm:grid-cols-2 border-red-400"
     >
       {/* product images section */}
       <div className="flex gap-x-2">
@@ -59,12 +60,14 @@ const HeroProduct = ({
         </div>
       </div>
       {/* product information section */}
-      <aside className="flex flex-col gap-y-3 sm:gap-y-6">
+      <aside className="flex flex-col gap-y-6">
         <h2 className="text-3xl sm:text-4xl font-bold">{title}</h2>
         <p className="w-full line-clamp-4 sm:line-clamp-5 sm:w-4/5 text-sm sm:text-base font-light">
           {description}
         </p>
-        <button>pay {price}</button>
+        <div className="mt-4 sm:mt-6">
+          <Button text={`pay ${price}`} action={() => {}} />
+        </div>
       </aside>
     </section>
   );

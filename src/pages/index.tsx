@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Head from "next/head";
-import Image from "next/image";
 import HeroProduct from "../components/HeroProduct/HeroProduct";
 import { storeFront } from "../utils";
 
@@ -22,7 +22,8 @@ import { storeFront } from "../utils";
 //   };
 // };
 
-export default function Home({ products }) {
+// eslint-disable-next-line react/prop-types
+export default function Home({ products }: any) {
   console.log("products::", products);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -34,10 +35,10 @@ export default function Home({ products }) {
       <main className="px-4 sm:px-2">
         <HeroProduct
           id={products.id}
-          title={products.title}
           description={products.description}
           images={products.images.edges}
           price={products.priceRange.minVariantPrice.amount}
+          title={products.title}
         />
       </main>
 
@@ -119,11 +120,16 @@ const SINGLE_PAGE_QUERY = gql`
   }
 `;
 
+// prep-halterneck-top-blue
+// callie-halterneck-top-blue
+// mandala-halterneck-top-blue
+// bounds-short-blue-206
+
 export async function getStaticProps() {
   // const { data } = await storeFront(PRODUCTS_QUERY);
   // return { props: { products: data.products } };
   const { data } = await storeFront(SINGLE_PAGE_QUERY, {
-    handle: "prep-halterneck-top-blue",
+    handle: "callie-halterneck-top-blue",
   });
   return { props: { products: data.productByHandle } };
 }
