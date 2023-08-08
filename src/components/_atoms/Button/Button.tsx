@@ -17,6 +17,7 @@ interface IButton {
    * when true, reveals a matching width div below the button for visual aesthetic
    */
   showButtonMirror?: boolean;
+  outlined?: boolean;
   action: () => void;
 }
 
@@ -26,9 +27,10 @@ const Button = ({
   type = "button",
   fullWidth,
   showButtonMirror,
+  outlined,
   action,
 }: IButton) => {
-  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Enter") {
       console.log("Enter pressed");
       action();
@@ -36,20 +38,22 @@ const Button = ({
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-fit">
       {showButtonMirror && (
         <div className="z-[-1] -translate-x-2 translate-y-2 absolute bg-rose-500 h-full w-full" />
       )}
       <button
         className={`
-        bg-black 
-        text-white 
         font-medium
         p-4
         px-6
         transition
-        hover:bg-gray-800
         ${fullWidth ? "w-full" : "w-fit"}
+        ${
+          outlined
+            ? "bg-white text-black border border-black hover:bg-gray-50 active:bg-gray-100"
+            : "bg-black text-white hover:bg-gray-900 active:bg-gray-800"
+        }
       `}
         onClick={action}
         onKeyUp={handleKeyUp}
