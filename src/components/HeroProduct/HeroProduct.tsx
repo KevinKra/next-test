@@ -60,13 +60,20 @@ const HeroProduct = ({
         </div>
       </div>
       {/* product information section */}
-      <aside className={`flex flex-col gap-y-6`}>
-        <h2 className="text-3xl sm:text-4xl font-bold">{title}</h2>
-        <p className="w-full line-clamp-4 sm:line-clamp-5 sm:w-4/5 text-sm sm:text-base font-light">
+      <aside className={`flex flex-col gap-y-4`}>
+        <h2 className="text-3xl sm:text-4xl font-bold underline decoration-rose-400 underline-offset-4">
+          {title}
+        </h2>
+        <p className="w-full line-clamp-4 sm:line-clamp-5 sm:w-4/5 text-sm sm:text-base sm:font-light">
           {description}
         </p>
-        <div className="mt-2 sm:mt-6 w-full sm:w-fit">
-          <Button text={`pay ${price}`} action={() => {}} fullWidth />
+        <div className="mt-4 sm:mt-8 w-full sm:w-fit">
+          <Button
+            showButtonMirror
+            text={`pay ${price}`}
+            action={() => {}}
+            fullWidth
+          />
         </div>
       </aside>
     </section>

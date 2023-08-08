@@ -143,7 +143,7 @@ export async function getStaticProps() {
   // const { data } = await storeFront(PRODUCTS_QUERY);
   // return { props: { products: data.products } };
   const { data } = await storeFront(SINGLE_PAGE_QUERY, {
-    handle: "callie-halterneck-top-blue",
+    handle: "mandala-halterneck-top-blue",
   });
   return { props: { products: data.productByHandle } };
 }
