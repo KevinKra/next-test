@@ -26,18 +26,25 @@ import { storeFront } from "../utils";
 export default function Home({ products }: any) {
   console.log("products::", products);
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Head>
         <title>Convert_Threads</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav className="grid place-items-center px-4 sm:px-2 border-b text-center h-12 sm:h-16 w-full">
+      <nav className="bg-white grid place-items-center px-4 sm:px-2 border-b text-center h-12 sm:h-16 w-full">
         <h1 className="text-xl sm:text-2xl font-bold cursor-pointer">
           Convert_Threads
         </h1>
       </nav>
-      <main className="px-4 sm:px-2 mt-4 sm:mt-10 max-w-7xl mx-auto">
+      <main className="grow flex flex-col gap-y-24 px-4 sm:px-2 mt-4 sm:mt-10 max-w-7xl mx-auto">
+        <HeroProduct
+          id={products.id}
+          description={products.description}
+          images={products.images.edges}
+          price={products.priceRange.minVariantPrice.amount}
+          title={products.title}
+        />
         <HeroProduct
           id={products.id}
           description={products.description}
@@ -70,8 +77,10 @@ export default function Home({ products }: any) {
         </section>
       </main> */}
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        footer
+      <footer className="grid place-items-center h-24 mt-8 bg-black border-t">
+        <p className="text-white font-light text-sm p-4 sm:p-2">
+          shop your favorite brands at convert_threads
+        </p>
       </footer>
     </div>
   );

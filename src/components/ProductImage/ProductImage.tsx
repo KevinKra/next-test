@@ -37,7 +37,7 @@ const ProductImage = ({
         transition
         duration-200
         ${hero ? "shadow-lg cursor-default" : "shadow-md cursor-pointer"}
-        ${active ? "border-black/30" : "border-slate-100"}
+        ${active ? "border-black/30" : "border-slate-200"}
       `}
       onClick={action}
     >

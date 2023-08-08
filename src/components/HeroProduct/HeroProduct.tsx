@@ -60,7 +60,7 @@ const HeroProduct = ({
         </div>
       </div>
       {/* product information section */}
-      <aside className="flex flex-col gap-y-6">
+      <aside className={`flex flex-col gap-y-6`}>
         <h2 className="text-3xl sm:text-4xl font-bold">{title}</h2>
         <p className="w-full line-clamp-4 sm:line-clamp-5 sm:w-4/5 text-sm sm:text-base font-light">
           {description}
