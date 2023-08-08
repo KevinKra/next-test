@@ -2,7 +2,25 @@ import Head from "next/head";
 import Image from "next/image";
 import { storeFront } from "../utils";
 
-export default function Home({ products }) {
+// temp
+type HomeProps = {
+  products: {
+    edges: {
+      node: {
+        id: string;
+        title: string;
+        description: string;
+        featuredImage: {
+          id: string;
+          src: string;
+          altText: string | null;
+        };
+      };
+    }[];
+  };
+};
+
+export default function Home({ products }: HomeProps) {
   console.log("products::", products);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -13,19 +31,22 @@ export default function Home({ products }) {
 
       <main className="">
         <section className="flex flex-col gap-y-4 rounded-sm">
-          {products.edges.map(({ node }) => (
+          {products.edges.map(({ node: product }) => (
             <div
-              key={node.id}
+              key={product.id}
               className="flex shadow-sm p-4 w-[15rem] gap-y-4 flex-col border items-center"
             >
               <Image
                 width={"250"}
                 height={"250"}
-                alt={node.altText}
-                src={node.featuredImage.src}
+                alt={
+                  product.featuredImage.altText ||
+                  `model wearing ${product.title}`
+                }
+                src={product.featuredImage.src}
               />
-              <h2 className="font-medium">{node.title}</h2>
-              <p className="text-sm line-clamp-4">{node.description}</p>
+              <h2 className="font-medium">{product.title}</h2>
+              <p className="text-sm line-clamp-4">{product.description}</p>
             </div>
           ))}
         </section>
@@ -38,8 +59,8 @@ export default function Home({ products }) {
   );
 }
 
+// todo - give me a home
 const gql = String.raw;
-
 const PRODUCTS_QUERY = gql`
   query products {
     products(first: 5) {

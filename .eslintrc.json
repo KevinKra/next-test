@@ -1,0 +1,38 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-unsafe-member-access": 1,
+    "@typescript-eslint/no-unsafe-assignment": 1,
+    "@typescript-eslint/unbound-method": 2,
+    "@typescript-eslint/no-unused-vars": 2,
+    "@typescript-eslint/no-unsafe-call": 2,
+    "@typescript-eslint/no-unsafe-return": 1,
+    "@typescript-eslint/restrict-template-expressions": 1,
+    "@typescript-eslint/no-empty-function": 1,
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      { "checksVoidReturn": { "attributes": false } }
+    ]
+  },
+  "ignorePatterns": ["*.config.js", "next.config.js", "**/*.d.ts"],
+  "overrides": []
+}

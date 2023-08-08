@@ -1,9 +1,9 @@
 /**
- * util for handling GQL API requests to Shopify storefront.
+ * util for handling GQL API requests to the Shopify storefront.
  *
  * **note:** variables defaults to empty object.
  */
-export const storeFront = async (query, variables = {}) => {
+export const storeFront = async (query: string, variables = {}) => {
   try {
     const response = await fetch(process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN, {
       method: "POST",
