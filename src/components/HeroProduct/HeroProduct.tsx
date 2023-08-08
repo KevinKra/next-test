@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductImage from "../ProductImage/ProductImage";
 
 interface IHeroProduct {
@@ -17,6 +17,25 @@ const HeroProduct = ({
   price,
 }: IHeroProduct) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
+  const [pauseCycle, setPauseCycle] = useState(false);
+
+  useEffect(() => {
+    const imagesCycler = setInterval(() => {
+      if (pauseCycle) return;
+
+      currentImageIdx < images.length - 1
+        ? setCurrentImageIdx((p) => p + 1)
+        : setCurrentImageIdx(0);
+    }, 2500);
+
+    // clean up interval
+    return () => clearInterval(imagesCycler);
+  }, [currentImageIdx, pauseCycle, images.length]);
+
+  const handleImageSelect = (index: number) => {
+    setPauseCycle(true);
+    setCurrentImageIdx(index);
+  };
 
   return (
     <section key={id} className="border border-red-400 p-2">
@@ -28,8 +47,8 @@ const HeroProduct = ({
               key={image.node.id}
               title={title}
               image={image}
-              action={() => setCurrentImageIdx(i)}
               active={i === currentImageIdx}
+              action={() => handleImageSelect(i)}
             />
           ))}
         </div>

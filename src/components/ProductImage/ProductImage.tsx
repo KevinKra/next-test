@@ -33,11 +33,10 @@ const ProductImage = ({
       className={`
         relative
         border
-        cursor-pointer
-        shadow-md
         h-fit
         transition
         duration-200
+        ${hero ? "shadow-lg cursor-default" : "shadow-md cursor-pointer"}
         ${active ? "border-black/30" : "border-slate-100"}
       `}
       onClick={action}
@@ -58,7 +57,9 @@ const ProductImage = ({
         src={image.node.originalSrc}
         height={hero ? 1000 : height}
         width={hero ? 500 : width}
+        priority={hero}
         alt={`${image.node.altText || title}`}
+        style={{ width: "auto", height: "100%" }}
       />
     </div>
   );

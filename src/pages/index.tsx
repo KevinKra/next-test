@@ -1,26 +1,28 @@
 import Head from "next/head";
 import Image from "next/image";
+import HeroProduct from "../components/HeroProduct/HeroProduct";
 import { storeFront } from "../utils";
 
 // temp
-type HomeProps = {
-  products: {
-    edges: {
-      node: {
-        id: string;
-        title: string;
-        description: string;
-        featuredImage: {
-          id: string;
-          src: string;
-          altText: string | null;
-        };
-      };
-    }[];
-  };
-};
+// type HomeProps = {
+//   products: {
+//     edges: {
+//       node: {
+//         id: string;
+//         title: string;
+//         handle: string;
+//         description: string;
+//         featuredImage: {
+//           id: string;
+//           src: string;
+//           altText: string | null;
+//         };
+//       };
+//     }[];
+//   };
+// };
 
-export default function Home({ products }: HomeProps) {
+export default function Home({ products }) {
   console.log("products::", products);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -29,7 +31,16 @@ export default function Home({ products }: HomeProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="">
+      <main>
+        <HeroProduct
+          id={products.id}
+          description={products.description}
+          images={products.images.edges}
+          price={products.priceRange.minVariantPrice.amount}
+        />
+      </main>
+
+      {/* <main className="">
         <section className="flex flex-col gap-y-4 rounded-sm">
           {products.edges.map(({ node: product }) => (
             <div
@@ -50,7 +61,7 @@ export default function Home({ products }: HomeProps) {
             </div>
           ))}
         </section>
-      </main>
+      </main> */}
 
       <footer className="flex items-center justify-center w-full h-24 border-t">
         footer
@@ -61,18 +72,45 @@ export default function Home({ products }: HomeProps) {
 
 // todo - give me a home
 const gql = String.raw;
-const PRODUCTS_QUERY = gql`
-  query products {
-    products(first: 5) {
-      edges {
-        node {
-          id
-          title
-          description
-          featuredImage {
-            src
+// const PRODUCTS_QUERY = gql`
+//   query products {
+//     products(first: 5) {
+//       edges {
+//         node {
+//           id
+//           handle
+//           title
+//           description
+//           featuredImage {
+//             src
+//             id
+//             altText
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
+
+const SINGLE_PAGE_QUERY = gql`
+  query SingleProduct($handle: String!) {
+    productByHandle(handle: $handle) {
+      id
+      title
+      description
+      tags
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      images(first: 4) {
+        edges {
+          node {
             id
             altText
+            originalSrc
           }
         }
       }
@@ -81,6 +119,10 @@ const PRODUCTS_QUERY = gql`
 `;
 
 export async function getStaticProps() {
-  const { data } = await storeFront(PRODUCTS_QUERY);
-  return { props: { products: data.products } };
+  // const { data } = await storeFront(PRODUCTS_QUERY);
+  // return { props: { products: data.products } };
+  const { data } = await storeFront(SINGLE_PAGE_QUERY, {
+    handle: "prep-halterneck-top-blue",
+  });
+  return { props: { products: data.productByHandle } };
 }
