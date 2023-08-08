@@ -21,6 +21,7 @@ export default function Home({ products }) {
               <Image
                 width={"250"}
                 height={"250"}
+                alt={node.altText}
                 src={node.featuredImage.src}
               />
               <h2 className="font-medium">{node.title}</h2>
