@@ -31,9 +31,10 @@ export default function Home({ products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="px-4 sm:px-2">
         <HeroProduct
           id={products.id}
+          title={products.title}
           description={products.description}
           images={products.images.edges}
           price={products.priceRange.minVariantPrice.amount}

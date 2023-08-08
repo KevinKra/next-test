@@ -19,6 +19,7 @@ const HeroProduct = ({
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [pauseCycle, setPauseCycle] = useState(false);
 
+  // useEffect handles the cycling of images
   useEffect(() => {
     const imagesCycler = setInterval(() => {
       if (pauseCycle) return;
@@ -28,7 +29,7 @@ const HeroProduct = ({
         : setCurrentImageIdx(0);
     }, 2500);
 
-    // clean up interval
+    // useEffect interval cleanup
     return () => clearInterval(imagesCycler);
   }, [currentImageIdx, pauseCycle, images.length]);
 
@@ -38,7 +39,11 @@ const HeroProduct = ({
   };
 
   return (
-    <section key={id} className="border border-red-400 p-2">
+    <section
+      key={id}
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2 border-red-400"
+    >
+      {/* product images section */}
       <div className="flex gap-x-2">
         <ProductImage hero title={title} image={images[currentImageIdx]} />
         <div className="flex flex-col gap-1">
@@ -53,9 +58,12 @@ const HeroProduct = ({
           ))}
         </div>
       </div>
-      <aside>
-        <h2>{title}</h2>
-        <p>{description}</p>
+      {/* product information section */}
+      <aside className="flex flex-col gap-y-3 sm:gap-y-6">
+        <h2 className="text-3xl sm:text-4xl font-bold">{title}</h2>
+        <p className="w-full line-clamp-4 sm:line-clamp-5 sm:w-4/5 text-sm sm:text-base font-light">
+          {description}
+        </p>
         <button>pay {price}</button>
       </aside>
     </section>
