@@ -26,13 +26,18 @@ import { storeFront } from "../utils";
 export default function Home({ products }: any) {
   console.log("products::", products);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div>
       <Head>
-        <title>My Shopping App</title>
+        <title>Convert_Threads</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="px-4 sm:px-2">
+      <nav className="grid place-items-center px-4 sm:px-2 border-b text-center h-12 sm:h-16 w-full">
+        <h1 className="text-xl sm:text-2xl font-bold cursor-pointer">
+          Convert_Threads
+        </h1>
+      </nav>
+      <main className="px-4 sm:px-2 mt-4 sm:mt-10 max-w-7xl mx-auto">
         <HeroProduct
           id={products.id}
           description={products.description}

@@ -65,8 +65,8 @@ const HeroProduct = ({
         <p className="w-full line-clamp-4 sm:line-clamp-5 sm:w-4/5 text-sm sm:text-base font-light">
           {description}
         </p>
-        <div className="mt-4 sm:mt-6">
-          <Button text={`pay ${price}`} action={() => {}} />
+        <div className="mt-2 sm:mt-6 w-full sm:w-fit">
+          <Button text={`pay ${price}`} action={() => {}} fullWidth />
         </div>
       </aside>
     </section>
