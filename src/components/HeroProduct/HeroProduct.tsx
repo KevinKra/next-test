@@ -16,9 +16,8 @@ const HeroProduct = ({
   title,
   description,
   images,
-  price,
-} // available,
-: IHeroProduct) => {
+  price, // available,
+}: IHeroProduct) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [pauseCycle, setPauseCycle] = useState(false);
 
@@ -48,7 +47,12 @@ const HeroProduct = ({
     >
       {/* product images section */}
       <div className="flex gap-x-2">
-        <ProductImage hero title={title} image={images[currentImageIdx]} />
+        <ProductImage
+          hero
+          defaultBorder
+          title={title}
+          image={images[currentImageIdx]}
+        />
         <div className="flex flex-col gap-1">
           {images.map((image, i) => (
             <ProductImage
@@ -57,6 +61,7 @@ const HeroProduct = ({
               image={image}
               active={i === currentImageIdx}
               action={() => handleImageSelect(i)}
+              defaultBorder
             />
           ))}
         </div>

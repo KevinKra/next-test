@@ -20,6 +20,7 @@ interface IProductImage {
    * when active, a low opacity screen fades in.
    */
   active?: boolean;
+  defaultBorder?: boolean;
   noShadow?: boolean;
   action?: () => void;
 }
@@ -31,6 +32,7 @@ const ProductImage = ({
   width = 100,
   hero,
   active,
+  defaultBorder,
   noShadow,
   action,
 }: IProductImage) => {
@@ -38,12 +40,12 @@ const ProductImage = ({
     <div
       className={`
         relative
-        border
         h-fit
         transition
         duration-200
         ${hero ? "shadow-lg cursor-default" : "shadow-md cursor-pointer"}
         ${active ? "border-black/30" : "border-slate-200"}
+        ${defaultBorder && "border"}
         ${noShadow && "shadow-none"}
       `}
       onClick={action}
