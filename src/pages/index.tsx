@@ -1,5 +1,5 @@
 import Head from "next/head";
-import HeroProduct from "../components/HeroProduct/HeroProduct";
+import ProductHero from "../components/ProductHero/ProductHero";
 import ProductRow from "../components/ProductRow/ProductRow";
 import { storeFront } from "../utils";
 
@@ -18,7 +18,7 @@ export default function Home({ product, products }: any) {
         </h1>
       </nav>
       <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10 sm:px-2">
-        <HeroProduct
+        <ProductHero
           id={product.id}
           title={product.title}
           description={product.description}

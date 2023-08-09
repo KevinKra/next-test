@@ -1,5 +1,6 @@
-import ProductImage, { ItemImage } from "../ProductImage/ProductImage";
+import ProductImage from "../ProductImage/ProductImage";
 import Button from "../_atoms/Button/Button";
+import { ItemImage } from "../../types";
 
 interface IProductCard {
   id: string;
@@ -11,8 +12,6 @@ interface IProductCard {
 }
 
 const ProductCard = ({ title, description, image, price }: IProductCard) => {
-  console.log("image", image);
-
   return (
     <div
       className="
@@ -32,9 +31,24 @@ const ProductCard = ({ title, description, image, price }: IProductCard) => {
         lg:grid-cols-2
       "
     >
-      <div className="h-full border border-2 border-rose-500">
+      {/* card image */}
+      <div className="h-full border-2 border-rose-500">
         <ProductImage noShadow width={500} title={title} image={image[0]} />
       </div>
+      {/* card body */}
+      <div className="flex flex-col gap-y-4">
+        <h4 className="w-1/5 text-xl font-bold">{title}</h4>
+        <p className="line-clamp-3 w-4/5 font-light md:hidden">{description}</p>
+        <div className="font-light lowercase">
+          <p>
+            <span className="font-medium">${price}</span>
+          </p>
+        </div>
+        <div className="mt-auto w-full lg:w-fit">
+          <Button fullWidth text="add to cart" action={() => {}} />
+        </div>
+      </div>
+      {/* absolute styled design element */}
       <div
         className="
           absolute 
@@ -57,18 +71,6 @@ const ProductCard = ({ title, description, image, price }: IProductCard) => {
           lg:skew-x-6
         "
       />
-      <div className="flex flex-col gap-y-4">
-        <h4 className="w-1/5 text-xl font-bold">{title}</h4>
-        <p className="line-clamp-3 w-4/5 font-light lg:hidden">{description}</p>
-        <div className="font-light lowercase">
-          <p>
-            <span className="font-medium">${price}</span>
-          </p>
-        </div>
-        <div className="mt-auto w-full lg:w-fit">
-          <Button fullWidth text="add to cart" action={() => {}} />
-        </div>
-      </div>
     </div>
   );
 };

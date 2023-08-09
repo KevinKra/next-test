@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import { ItemImage } from "../../types";
 import ProductImage from "../ProductImage/ProductImage";
 import Button from "../_atoms/Button/Button";
 
-interface IHeroProduct {
+interface IProductHero {
   id: string;
   title: string;
   description: string;
-  images: { node: { id: string; altText?: string; originalSrc: string } }[];
+  images: ItemImage[];
   price: string;
   available: boolean;
 }
@@ -16,8 +17,8 @@ const HeroProduct = ({
   title,
   description,
   images,
-  price, // available,
-}: IHeroProduct) => {
+  price,
+}: IProductHero) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [pauseCycle, setPauseCycle] = useState(false);
 
@@ -30,7 +31,6 @@ const HeroProduct = ({
         ? setCurrentImageIdx((i) => i + 1)
         : setCurrentImageIdx(0);
     }, 2500);
-
     // useEffect interval cleanup
     return () => clearInterval(imagesCycler);
   }, [currentImageIdx, pauseCycle, images.length]);
@@ -95,7 +95,7 @@ const HeroProduct = ({
             action={() => {}}
             fullWidth
           />
-          {/* discovery showed items from api are not available, otherwise see below ... */}
+          {/* discovery revealed items from api are not available, otherwise see below ... */}
           {/* <Button
             outlined
             showButtonMirror

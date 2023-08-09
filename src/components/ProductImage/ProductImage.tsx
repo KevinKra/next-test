@@ -1,8 +1,5 @@
 import Image from "next/image";
-
-export type ItemImage = {
-  node: { id: string; altText?: string; originalSrc: string };
-};
+import { ItemImage } from "../../types";
 
 interface IProductImage {
   /**
@@ -43,7 +40,7 @@ const ProductImage = ({
         h-fit
         transition
         duration-200
-        ${hero ? "shadow-lg cursor-default" : "shadow-md cursor-pointer"}
+        ${hero ? "cursor-default shadow-lg" : "cursor-pointer shadow-md"}
         ${active ? "border-black/30" : "border-slate-200"}
         ${defaultBorder && "border"}
         ${noShadow && "shadow-none"}
