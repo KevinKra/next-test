@@ -17,7 +17,7 @@ export default function Home({ product, products }: any) {
           Convert_Threads
         </h1>
       </nav>
-      <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10 sm:px-2">
+      <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10">
         <ProductHero
           id={product.id}
           title={product.title}

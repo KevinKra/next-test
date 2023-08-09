@@ -32,19 +32,19 @@ const ProductCard = ({ title, description, image, price }: IProductCard) => {
       "
     >
       {/* card image */}
-      <div className="h-full border-2 border-rose-500">
+      <div className="h-fit border-2 border-rose-500">
         <ProductImage noShadow width={500} title={title} image={image[0]} />
       </div>
       {/* card body */}
-      <div className="flex flex-col gap-y-4">
-        <h4 className="w-1/5 text-xl font-bold">{title}</h4>
+      <div className="flex h-full flex-col gap-y-2 lg:gap-y-4">
+        <h4 className="w-1/5 text-xl font-bold md:w-full lg:w-1/5">{title}</h4>
         <p className="line-clamp-3 w-4/5 font-light md:hidden">{description}</p>
-        <div className="font-light lowercase">
+        <div className="mb-4 font-light lowercase">
           <p>
             <span className="font-medium">${price}</span>
           </p>
         </div>
-        <div className="mt-auto w-full lg:w-fit">
+        <div className="mt-auto w-full">
           <Button fullWidth text="add to cart" action={() => {}} />
         </div>
       </div>
