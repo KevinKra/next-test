@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useCart from "../../hooks/useCart/useCart";
 import { ItemImage } from "../../types";
 import ProductImage from "../ProductImage/ProductImage";
 import Button from "../_atoms/Button/Button";
@@ -21,6 +22,7 @@ const HeroProduct = ({
 }: IProductHero) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [pauseCycle, setPauseCycle] = useState(false);
+  const addCartItem = useCart((state) => state.addCartItem);
 
   useEffect(() => {
     // useEffect handles the cycling of images
@@ -92,7 +94,16 @@ const HeroProduct = ({
           <Button
             showButtonMirror
             text={`add to cart`}
-            action={() => {}}
+            action={() =>
+              addCartItem({
+                id,
+                title,
+                description,
+                images,
+                price,
+                handle: "a",
+              })
+            }
             fullWidth
           />
           {/* discovery revealed items from api are not available, otherwise see below ... */}
