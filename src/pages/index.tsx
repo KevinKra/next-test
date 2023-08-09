@@ -19,12 +19,11 @@ export default function Home({ product, products }: any) {
       </nav>
       <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10">
         <ProductHero
-          id={product.id}
-          title={product.title}
-          description={product.description}
-          images={product.images.edges}
-          price={product.priceRange.minVariantPrice.amount}
-          available={product.availableForSale}
+          product={{
+            ...product,
+            images: product.images.edges,
+            price: product.priceRange.minVariantPrice.amount,
+          }}
         />
         <ProductRow products={products} />
       </main>
