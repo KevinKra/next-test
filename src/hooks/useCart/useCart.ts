@@ -7,6 +7,10 @@ interface CartItem extends Product {
 }
 
 interface CartStore {
+  // cart modal controls
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
   /**
    * when product `objects` are added to the cart, they are stored in this stateful array.
    */
@@ -26,6 +30,12 @@ interface CartStore {
 }
 
 const useCart = create<CartStore>((set, get) => ({
+  // cart modal controls
+  isOpen: false,
+  onOpen: () => set({ isOpen: true }),
+  onClose: () => set({ isOpen: false }),
+
+  // cart state and logic
   items: [],
   addCartItem: (newItem) => {
     const cartItems = get().items;

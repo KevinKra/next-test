@@ -1,3 +1,5 @@
+import Cart from "../components/_molecules/Cart/Cart";
+import NavBar from "../components/_molecules/NavBar/NavBar";
 import ProductHero from "../components/_molecules/ProductHero/ProductHero";
 import ProductRow from "../components/_molecules/ProductRow/ProductRow";
 import { PAGE_QUERY } from "../gql/queries/productsPage";
@@ -12,17 +14,26 @@ interface PageData {
 }
 
 export default function Home({ product, products }: PageData) {
-  console.log("products::", product, products);
+  // console.log("products::", product, products);
   return (
-    <div className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10">
-      <ProductHero
-        product={{
-          ...product,
-          images: product.images.edges,
-          price: product.priceRange.minVariantPrice.amount,
-        }}
-      />
-      <ProductRow products={products} />
+    <div className="flex min-h-screen flex-col">
+      <NavBar />
+      <Cart />
+      <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10">
+        <ProductHero
+          product={{
+            ...product,
+            images: product.images.edges,
+            price: product.priceRange.minVariantPrice.amount,
+          }}
+        />
+        <ProductRow products={products} />
+      </main>
+      <footer className="mt-8 grid h-24 place-items-center border-t bg-black">
+        <p className="p-4 text-sm font-light text-white sm:p-2">
+          shop your favorite brands at convert_threads
+        </p>
+      </footer>
     </div>
   );
 }
