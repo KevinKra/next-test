@@ -1,6 +1,7 @@
 import Head from "next/head";
 import ProductHero from "../components/ProductHero/ProductHero";
 import ProductRow from "../components/ProductRow/ProductRow";
+import { PAGE_QUERY } from "../gql/queries/productsPage";
 import { ProductApiResponse } from "../types";
 import { storeFront } from "../utils";
 
@@ -42,64 +43,6 @@ export default function Home({ product, products }: PageData) {
     </div>
   );
 }
-
-// todo - give me a home
-const gql = String.raw;
-
-const PAGE_QUERY = gql`
-  query SingleProduct($handle: String!) {
-    productByHandle(handle: $handle) {
-      id
-      title
-      description
-      availableForSale
-      handle
-      vendor
-      productType
-      priceRange {
-        minVariantPrice {
-          amount
-        }
-      }
-      images(first: 4) {
-        edges {
-          node {
-            id
-            altText
-            originalSrc
-          }
-        }
-      }
-    }
-    products(first: 3) {
-      edges {
-        node {
-          id
-          title
-          description
-          availableForSale
-          handle
-          vendor
-          productType
-          priceRange {
-            minVariantPrice {
-              amount
-            }
-          }
-          images(first: 1) {
-            edges {
-              node {
-                id
-                altText
-                originalSrc
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 // prep-halterneck-top-blue
 // callie-halterneck-top-blue
