@@ -43,7 +43,7 @@ const HeroProduct = ({
   return (
     <section
       key={id}
-      className="grid grid-cols-1 gap-6 sm:gap-12 sm:grid-cols-2 border-red-400"
+      className="grid grid-cols-1 gap-6 border-red-400 sm:grid-cols-2 sm:gap-12"
     >
       {/* product images section */}
       <div className="flex gap-x-2">
@@ -69,19 +69,19 @@ const HeroProduct = ({
       {/* product information section */}
       <aside>
         <div className={`flex flex-col gap-y-6`}>
-          <h2 className="text-3xl sm:text-4xl font-bold underline decoration-rose-400 underline-offset-3">
+          <h2 className="underline-offset-3 text-3xl font-bold underline decoration-rose-400 sm:text-4xl">
             {title}
           </h2>
-          <p className="w-full line-clamp-4 sm:line-clamp-5 sm:w-4/5 text-sm sm:text-base sm:font-light">
+          <p className="line-clamp-4 w-full text-sm sm:line-clamp-5 sm:w-4/5 sm:text-base sm:font-light">
             {description}
           </p>
-          <div className="lowercase font-light">
+          <div className="font-light lowercase">
             <p>
               starting at at <span className="font-bold">${price}</span>
             </p>
           </div>
         </div>
-        <div className="flex gap-6 flex-col sm:flex-row mt-4 sm:mt-10 w-full md:w-3/5">
+        <div className="mt-4 flex w-full flex-col gap-6 sm:mt-10 sm:flex-row lg:w-3/5">
           <Button
             outlined
             showButtonMirror

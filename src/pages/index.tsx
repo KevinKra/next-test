@@ -1,78 +1,35 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Head from "next/head";
 import HeroProduct from "../components/HeroProduct/HeroProduct";
+import ProductRow from "../components/ProductRow/ProductRow";
 import { storeFront } from "../utils";
 
-// temp
-// type HomeProps = {
-//   products: {
-//     edges: {
-//       node: {
-//         id: string;
-//         title: string;
-//         handle: string;
-//         description: string;
-//         featuredImage: {
-//           id: string;
-//           src: string;
-//           altText: string | null;
-//         };
-//       };
-//     }[];
-//   };
-// };
-
-// eslint-disable-next-line react/prop-types
-export default function Home({ products }: any) {
-  console.log("products::", products);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Home({ product, products }: any) {
+  console.log("products::", product, products);
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Head>
         <title>Convert_Threads</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <nav className="bg-black sm:bg-white grid place-items-center px-4 sm:px-2 border-b text-center h-12 sm:h-16 w-full">
-        <h1 className="text-lg text-white sm:text-black sm:text-2xl font-bold cursor-pointer">
+      <nav className="grid h-12 w-full place-items-center border-b bg-black px-4 text-center sm:h-16 sm:bg-white sm:px-2">
+        <h1 className="cursor-pointer text-lg font-bold text-white sm:text-2xl sm:text-black">
           Convert_Threads
         </h1>
       </nav>
-      <main className="grow flex flex-col gap-y-24 px-4 sm:px-2 mt-4 sm:mt-10 max-w-7xl mx-auto">
+      <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10 sm:px-2">
         <HeroProduct
-          id={products.id}
-          title={products.title}
-          description={products.description}
-          images={products.images.edges}
-          price={products.priceRange.minVariantPrice.amount}
-          available={products.availableForSale}
+          id={product.id}
+          title={product.title}
+          description={product.description}
+          images={product.images.edges}
+          price={product.priceRange.minVariantPrice.amount}
+          available={product.availableForSale}
         />
+        <ProductRow products={products} />
       </main>
-
-      {/* <main className="">
-        <section className="flex flex-col gap-y-4 rounded-sm">
-          {products.edges.map(({ node: product }) => (
-            <div
-              key={product.id}
-              className="flex shadow-sm p-4 w-[15rem] gap-y-4 flex-col border items-center"
-            >
-              <Image
-                width={"250"}
-                height={"250"}
-                alt={
-                  product.featuredImage.altText ||
-                  `model wearing ${product.title}`
-                }
-                src={product.featuredImage.src}
-              />
-              <h2 className="font-medium">{product.title}</h2>
-              <p className="text-sm line-clamp-4">{product.description}</p>
-            </div>
-          ))}
-        </section>
-      </main> */}
-
-      <footer className="grid place-items-center h-24 mt-8 bg-black border-t">
-        <p className="text-white font-light text-sm p-4 sm:p-2">
+      <footer className="mt-8 grid h-24 place-items-center border-t bg-black">
+        <p className="p-4 text-sm font-light text-white sm:p-2">
           shop your favorite brands at convert_threads
         </p>
       </footer>
@@ -82,27 +39,8 @@ export default function Home({ products }: any) {
 
 // todo - give me a home
 const gql = String.raw;
-// const PRODUCTS_QUERY = gql`
-//   query products {
-//     products(first: 5) {
-//       edges {
-//         node {
-//           id
-//           handle
-//           title
-//           description
-//           featuredImage {
-//             src
-//             id
-//             altText
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
 
-const SINGLE_PAGE_QUERY = gql`
+const PAGE_QUERY = gql`
   query SingleProduct($handle: String!) {
     productByHandle(handle: $handle) {
       id
@@ -126,6 +64,32 @@ const SINGLE_PAGE_QUERY = gql`
         }
       }
     }
+    products(first: 3) {
+      edges {
+        node {
+          id
+          availableForSale
+          title
+          description
+          vendor
+          productType
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                id
+                altText
+                originalSrc
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -137,8 +101,10 @@ const SINGLE_PAGE_QUERY = gql`
 export async function getStaticProps() {
   // const { data } = await storeFront(PRODUCTS_QUERY);
   // return { props: { products: data.products } };
-  const { data } = await storeFront(SINGLE_PAGE_QUERY, {
+  const { data } = await storeFront(PAGE_QUERY, {
     handle: "mandala-halterneck-top-blue",
   });
-  return { props: { products: data.productByHandle } };
+  return {
+    props: { product: data.productByHandle, products: data.products.edges },
+  };
 }
