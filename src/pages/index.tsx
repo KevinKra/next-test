@@ -1,4 +1,3 @@
-import Head from "next/head";
 import ProductHero from "../components/_molecules/ProductHero/ProductHero";
 import ProductRow from "../components/_molecules/ProductRow/ProductRow";
 import { PAGE_QUERY } from "../gql/queries/productsPage";
@@ -15,31 +14,15 @@ interface PageData {
 export default function Home({ product, products }: PageData) {
   console.log("products::", product, products);
   return (
-    <div className="flex min-h-screen flex-col">
-      <Head>
-        <title>Convert_Threads</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <nav className="grid h-12 w-full place-items-center border-b bg-black px-4 text-center sm:h-16 sm:bg-white sm:px-2">
-        <h1 className="cursor-pointer text-lg font-bold text-white sm:text-2xl sm:text-black">
-          Convert_Threads
-        </h1>
-      </nav>
-      <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10">
-        <ProductHero
-          product={{
-            ...product,
-            images: product.images.edges,
-            price: product.priceRange.minVariantPrice.amount,
-          }}
-        />
-        <ProductRow products={products} />
-      </main>
-      <footer className="mt-8 grid h-24 place-items-center border-t bg-black">
-        <p className="p-4 text-sm font-light text-white sm:p-2">
-          shop your favorite brands at convert_threads
-        </p>
-      </footer>
+    <div className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10">
+      <ProductHero
+        product={{
+          ...product,
+          images: product.images.edges,
+          price: product.priceRange.minVariantPrice.amount,
+        }}
+      />
+      <ProductRow products={products} />
     </div>
   );
 }
