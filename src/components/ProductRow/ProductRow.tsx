@@ -1,16 +1,8 @@
-import { ItemImage, Product } from "../../types";
 import ProductCard from "../ProductCard/ProductCard";
-
-interface ProductType extends Omit<Product, "images" | "price"> {
-  /**
-   * override Product image property to match api response
-   */
-  images: { edges: ItemImage[] };
-  priceRange: { minVariantPrice: { amount: string } };
-}
+import { ProductApiResponse } from "../../types";
 
 interface IProductRow {
-  products: { node: ProductType }[];
+  products: { node: ProductApiResponse }[];
 }
 
 const ProductRow = ({ products }: IProductRow) => {

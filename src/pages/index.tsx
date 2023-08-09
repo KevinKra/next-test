@@ -1,10 +1,17 @@
 import Head from "next/head";
 import ProductHero from "../components/ProductHero/ProductHero";
 import ProductRow from "../components/ProductRow/ProductRow";
+import { ProductApiResponse } from "../types";
 import { storeFront } from "../utils";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Home({ product, products }: any) {
+interface PageData {
+  product: ProductApiResponse;
+  products: {
+    node: ProductApiResponse;
+  }[];
+}
+
+export default function Home({ product, products }: PageData) {
   console.log("products::", product, products);
   return (
     <div className="flex min-h-screen flex-col">
