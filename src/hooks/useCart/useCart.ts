@@ -7,8 +7,22 @@ interface CartItem extends Product {
 }
 
 interface CartStore {
+  /**
+   * when product `objects` are added to the cart, they are stored in this stateful array.
+   */
   items: CartItem[];
+  /**
+   * adds new items or increments (count and price) of existing items in the cart.
+   */
   addCartItem: (newItem: Omit<CartItem, "count">) => void;
+  /**
+   * removes item (regardless of count) from the cart.
+   */
+  removeCartItem: (itemId: string) => void;
+  /**
+   * removes all items from the cart, sets cart as empty array `[]`
+   */
+  clearCart: () => void;
 }
 
 const useCart = create<CartStore>((set, get) => ({
@@ -33,10 +47,19 @@ const useCart = create<CartStore>((set, get) => ({
       // else, add new item
       cartItemsClone.push({ ...newItem, count: 1 });
     }
-    // update cart with clone
-    console.log("x", cartItemsClone);
+
     set({ items: cartItemsClone });
   },
+  removeCartItem: (itemId) => {
+    const cartItems = get().items;
+    const cartItemsClone = cloneDeep(cartItems);
+
+    const filteredCartItems = cartItemsClone.filter(
+      (item) => item.id !== itemId,
+    );
+    set({ items: filteredCartItems });
+  },
+  clearCart: () => set({ items: [] }),
 }));
 
 export default useCart;
