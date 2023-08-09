@@ -1,12 +1,15 @@
 import ProductImage from "../ProductImage/ProductImage";
 import Button from "../_atoms/Button/Button";
 import { Product } from "../../types";
+import useCart from "../../hooks/useCart/useCart";
 
 interface IProductCard {
   product: Product;
 }
 
 const ProductCard = ({ product }: IProductCard) => {
+  const addCartItem = useCart((state) => state.addCartItem);
+
   return (
     <div
       className="
@@ -49,7 +52,11 @@ const ProductCard = ({ product }: IProductCard) => {
           </p>
         </div>
         <div className="mt-auto w-full">
-          <Button fullWidth text="add to cart" action={() => {}} />
+          <Button
+            fullWidth
+            text="add to cart"
+            action={() => addCartItem(product)}
+          />
         </div>
       </div>
       {/* absolute styled design element */}

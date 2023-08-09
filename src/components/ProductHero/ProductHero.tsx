@@ -76,7 +76,7 @@ const ProductHero = ({ product }: IProductHero) => {
             outlined
             showButtonMirror
             text={`only $${product.price}`}
-            action={() => {}}
+            action={() => addCartItem(product)}
             fullWidth
           />
           <Button

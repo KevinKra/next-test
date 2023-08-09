@@ -9,7 +9,10 @@ export type Product = {
   id: string;
   title: string;
   description: string;
+  availableForSale: boolean;
   handle: string;
+  vendor: string;
+  productType: string;
   images: ItemImage[];
   price: string;
 };

@@ -47,7 +47,8 @@ const PAGE_QUERY = gql`
       description
       availableForSale
       handle
-      tags
+      vendor
+      productType
       priceRange {
         minVariantPrice {
           amount
@@ -67,9 +68,10 @@ const PAGE_QUERY = gql`
       edges {
         node {
           id
-          availableForSale
           title
           description
+          availableForSale
+          handle
           vendor
           productType
           priceRange {
@@ -98,8 +100,6 @@ const PAGE_QUERY = gql`
 // bounds-short-blue-206
 
 export async function getStaticProps() {
-  // const { data } = await storeFront(PRODUCTS_QUERY);
-  // return { props: { products: data.products } };
   const { data } = await storeFront(PAGE_QUERY, {
     handle: "mandala-halterneck-top-blue",
   });

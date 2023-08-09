@@ -1,11 +1,12 @@
 import { ItemImage, Product } from "../../types";
 import ProductCard from "../ProductCard/ProductCard";
 
-interface ProductType extends Omit<Product, "images"> {
+interface ProductType extends Omit<Product, "images" | "price"> {
   /**
    * override Product image property to match api response
    */
   images: { edges: ItemImage[] };
+  priceRange: { minVariantPrice: { amount: string } };
 }
 
 interface IProductRow {
@@ -21,7 +22,7 @@ const ProductRow = ({ products }: IProductRow) => {
           product={{
             ...product,
             images: product.images.edges,
-            price: product.price,
+            price: product.priceRange.minVariantPrice.amount,
           }}
         />
       ))}
