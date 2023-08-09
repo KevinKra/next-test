@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useCart from "../../hooks/useCart/useCart";
-import { Product } from "../../types";
+import useCart from "../../../hooks/useCart/useCart";
+import { Product } from "../../../types";
 import ProductImage from "../ProductImage/ProductImage";
-import Button from "../_atoms/Button/Button";
+import Button from "../../_atoms/Button/Button";
 
 interface IProductHero {
   product: Product;

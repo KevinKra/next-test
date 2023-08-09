@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ItemImage } from "../../types";
+import { ItemImage } from "../../../types";
 
 interface IProductImage {
   /**

@@ -1,5 +1,5 @@
 import ProductCard from "../ProductCard/ProductCard";
-import { ProductApiResponse } from "../../types";
+import { ProductApiResponse } from "../../../types";
 
 interface IProductRow {
   products: { node: ProductApiResponse }[];

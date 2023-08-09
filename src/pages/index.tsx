@@ -1,6 +1,6 @@
 import Head from "next/head";
-import ProductHero from "../components/ProductHero/ProductHero";
-import ProductRow from "../components/ProductRow/ProductRow";
+import ProductHero from "../components/_molecules/ProductHero/ProductHero";
+import ProductRow from "../components/_molecules/ProductRow/ProductRow";
 import { PAGE_QUERY } from "../gql/queries/productsPage";
 import { ProductApiResponse } from "../types";
 import { storeFront } from "../utils";

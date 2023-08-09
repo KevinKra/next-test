@@ -1,7 +1,7 @@
 import ProductImage from "../ProductImage/ProductImage";
-import Button from "../_atoms/Button/Button";
-import { Product } from "../../types";
-import useCart from "../../hooks/useCart/useCart";
+import Button from "../../_atoms/Button/Button";
+import { Product } from "../../../types";
+import useCart from "../../../hooks/useCart/useCart";
 
 interface IProductCard {
   product: Product;
