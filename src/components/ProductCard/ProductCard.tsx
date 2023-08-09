@@ -17,15 +17,17 @@ const ProductCard = ({ title, description, image, price }: IProductCard) => {
     <div
       className="
         relative
-        flex
-        flex-col
-        gap-4 
-        overflow-hidden 
+        grid 
+        grid-cols-2
+        gap-4
+        overflow-hidden
         border 
         border-b-rose-500 
         border-r-rose-500 
         p-2 
         shadow-md 
+        md:flex 
+        md:flex-col 
         lg:grid 
         lg:grid-cols-2
       "
@@ -36,13 +38,18 @@ const ProductCard = ({ title, description, image, price }: IProductCard) => {
       <div
         className="
           absolute 
-          left-0
-          top-0 
+          -left-6
+          top-0
           z-[-1] 
-          h-[15rem]
-          w-[50rem]
-          skew-x-0
-          bg-rose-500 
+          h-[25rem] 
+          w-[8rem] 
+          rotate-0 
+          skew-x-6
+          bg-rose-500
+          md:left-0
+          md:h-[15rem]
+          md:w-[50rem] 
+          md:skew-x-0
           lg:-left-6 
           lg:h-[25rem] 
           lg:w-[8rem] 
