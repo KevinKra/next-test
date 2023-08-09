@@ -1,8 +1,15 @@
-import React from "react";
+import { ItemImage, Product } from "../../types";
 import ProductCard from "../ProductCard/ProductCard";
 
+interface ProductType extends Omit<Product, "images"> {
+  /**
+   * override Product image property to match api response
+   */
+  images: { edges: ItemImage[] };
+}
+
 interface IProductRow {
-  products: unknown[];
+  products: { node: ProductType }[];
 }
 
 const ProductRow = ({ products }: IProductRow) => {
@@ -11,12 +18,11 @@ const ProductRow = ({ products }: IProductRow) => {
       {products.map(({ node: product }) => (
         <ProductCard
           key={product.id}
-          id={product.id}
-          title={product.title}
-          description={product.description}
-          handle={product.handle}
-          image={product.images.edges}
-          price={product.priceRange.minVariantPrice.amount}
+          product={{
+            ...product,
+            images: product.images.edges,
+            price: product.price,
+          }}
         />
       ))}
     </section>
