@@ -1,11 +1,15 @@
 import Image from "next/image";
 
+export type ItemImage = {
+  node: { id: string; altText?: string; originalSrc: string };
+};
+
 interface IProductImage {
   /**
    * title provides failover incase image has null or empty altText property.
    */
   title: string;
-  image: { node: { id: string; altText?: string; originalSrc: string } };
+  image: ItemImage;
   /**
    * set true if hero, otherwise use default `height` / `width` or provided prop values.
    */
@@ -16,6 +20,7 @@ interface IProductImage {
    * when active, a low opacity screen fades in.
    */
   active?: boolean;
+  noShadow?: boolean;
   action?: () => void;
 }
 
@@ -26,6 +31,7 @@ const ProductImage = ({
   width = 100,
   hero,
   active,
+  noShadow,
   action,
 }: IProductImage) => {
   return (
@@ -38,6 +44,7 @@ const ProductImage = ({
         duration-200
         ${hero ? "shadow-lg cursor-default" : "shadow-md cursor-pointer"}
         ${active ? "border-black/30" : "border-slate-200"}
+        ${noShadow && "shadow-none"}
       `}
       onClick={action}
     >

@@ -17,8 +17,8 @@ const HeroProduct = ({
   description,
   images,
   price,
-  available,
-}: IHeroProduct) => {
+} // available,
+: IHeroProduct) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [pauseCycle, setPauseCycle] = useState(false);
 
@@ -80,6 +80,20 @@ const HeroProduct = ({
           <Button
             outlined
             showButtonMirror
+            text={`only $${price}`}
+            action={() => {}}
+            fullWidth
+          />
+          <Button
+            showButtonMirror
+            text={`add to cart`}
+            action={() => {}}
+            fullWidth
+          />
+          {/* discovery showed items from api are not available, otherwise see below ... */}
+          {/* <Button
+            outlined
+            showButtonMirror
             text={available ? `only $${price}` : "sold out"}
             action={() => {}}
             fullWidth
@@ -93,7 +107,7 @@ const HeroProduct = ({
               fullWidth
               disabled={!available}
             />
-          )}
+          )} */}
         </div>
       </aside>
     </section>
