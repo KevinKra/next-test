@@ -1,59 +1,37 @@
 import Head from "next/head";
-import Image from "next/image";
+import ProductHero from "../components/ProductHero/ProductHero";
+import ProductRow from "../components/ProductRow/ProductRow";
 import { storeFront } from "../utils";
 
-// temp
-type HomeProps = {
-  products: {
-    edges: {
-      node: {
-        id: string;
-        title: string;
-        description: string;
-        featuredImage: {
-          id: string;
-          src: string;
-          altText: string | null;
-        };
-      };
-    }[];
-  };
-};
-
-export default function Home({ products }: HomeProps) {
-  console.log("products::", products);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Home({ product, products }: any) {
+  console.log("products::", product, products);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex min-h-screen flex-col">
       <Head>
-        <title>My Shopping App</title>
+        <title>Convert_Threads</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className="">
-        <section className="flex flex-col gap-y-4 rounded-sm">
-          {products.edges.map(({ node: product }) => (
-            <div
-              key={product.id}
-              className="flex shadow-sm p-4 w-[15rem] gap-y-4 flex-col border items-center"
-            >
-              <Image
-                width={"250"}
-                height={"250"}
-                alt={
-                  product.featuredImage.altText ||
-                  `model wearing ${product.title}`
-                }
-                src={product.featuredImage.src}
-              />
-              <h2 className="font-medium">{product.title}</h2>
-              <p className="text-sm line-clamp-4">{product.description}</p>
-            </div>
-          ))}
-        </section>
+      <nav className="grid h-12 w-full place-items-center border-b bg-black px-4 text-center sm:h-16 sm:bg-white sm:px-2">
+        <h1 className="cursor-pointer text-lg font-bold text-white sm:text-2xl sm:text-black">
+          Convert_Threads
+        </h1>
+      </nav>
+      <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10">
+        <ProductHero
+          id={product.id}
+          title={product.title}
+          description={product.description}
+          images={product.images.edges}
+          price={product.priceRange.minVariantPrice.amount}
+          available={product.availableForSale}
+        />
+        <ProductRow products={products} />
       </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        footer
+      <footer className="mt-8 grid h-24 place-items-center border-t bg-black">
+        <p className="p-4 text-sm font-light text-white sm:p-2">
+          shop your favorite brands at convert_threads
+        </p>
       </footer>
     </div>
   );
@@ -61,18 +39,53 @@ export default function Home({ products }: HomeProps) {
 
 // todo - give me a home
 const gql = String.raw;
-const PRODUCTS_QUERY = gql`
-  query products {
-    products(first: 5) {
+
+const PAGE_QUERY = gql`
+  query SingleProduct($handle: String!) {
+    productByHandle(handle: $handle) {
+      id
+      title
+      description
+      availableForSale
+      handle
+      tags
+      priceRange {
+        minVariantPrice {
+          amount
+        }
+      }
+      images(first: 4) {
+        edges {
+          node {
+            id
+            altText
+            originalSrc
+          }
+        }
+      }
+    }
+    products(first: 3) {
       edges {
         node {
           id
+          availableForSale
           title
           description
-          featuredImage {
-            src
-            id
-            altText
+          vendor
+          productType
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                id
+                altText
+                originalSrc
+              }
+            }
           }
         }
       }
@@ -80,7 +93,18 @@ const PRODUCTS_QUERY = gql`
   }
 `;
 
+// prep-halterneck-top-blue
+// callie-halterneck-top-blue
+// mandala-halterneck-top-blue
+// bounds-short-blue-206
+
 export async function getStaticProps() {
-  const { data } = await storeFront(PRODUCTS_QUERY);
-  return { props: { products: data.products } };
+  // const { data } = await storeFront(PRODUCTS_QUERY);
+  // return { props: { products: data.products } };
+  const { data } = await storeFront(PAGE_QUERY, {
+    handle: "mandala-halterneck-top-blue",
+  });
+  return {
+    props: { product: data.productByHandle, products: data.products.edges },
+  };
 }
