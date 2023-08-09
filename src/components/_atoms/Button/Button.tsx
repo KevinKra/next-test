@@ -18,6 +18,7 @@ interface IButton {
    */
   showButtonMirror?: boolean;
   outlined?: boolean;
+  disabled?: boolean;
   action: () => void;
 }
 
@@ -28,6 +29,7 @@ const Button = ({
   fullWidth,
   showButtonMirror,
   outlined,
+  disabled,
   action,
 }: IButton) => {
   const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -54,7 +56,16 @@ const Button = ({
             ? "bg-white text-black border border-black hover:bg-gray-50 active:bg-gray-100"
             : "bg-black text-white hover:bg-gray-900 active:bg-gray-800"
         }
+        ${
+          disabled && outlined && "text-rose-500 hover:bg-white active:bg-white"
+        }
+        ${
+          disabled &&
+          !outlined &&
+          "text-gray-400 bg-gray-700 hover:bg-gray-700 active:bg-gray-700 line-through"
+        }
       `}
+        disabled={disabled}
         onClick={action}
         onKeyUp={handleKeyUp}
         aria-label={ariaLabel || text}

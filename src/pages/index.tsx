@@ -32,25 +32,19 @@ export default function Home({ products }: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <nav className="bg-white grid place-items-center px-4 sm:px-2 border-b text-center h-12 sm:h-16 w-full">
-        <h1 className="text-xl sm:text-2xl font-bold cursor-pointer">
+      <nav className="bg-black sm:bg-white grid place-items-center px-4 sm:px-2 border-b text-center h-12 sm:h-16 w-full">
+        <h1 className="text-lg text-white sm:text-black sm:text-2xl font-bold cursor-pointer">
           Convert_Threads
         </h1>
       </nav>
       <main className="grow flex flex-col gap-y-24 px-4 sm:px-2 mt-4 sm:mt-10 max-w-7xl mx-auto">
         <HeroProduct
           id={products.id}
+          title={products.title}
           description={products.description}
           images={products.images.edges}
           price={products.priceRange.minVariantPrice.amount}
-          title={products.title}
-        />
-        <HeroProduct
-          id={products.id}
-          description={products.description}
-          images={products.images.edges}
-          price={products.priceRange.minVariantPrice.amount}
-          title={products.title}
+          available={products.availableForSale}
         />
       </main>
 
@@ -114,11 +108,12 @@ const SINGLE_PAGE_QUERY = gql`
       id
       title
       description
+      availableForSale
+      handle
       tags
       priceRange {
         minVariantPrice {
           amount
-          currencyCode
         }
       }
       images(first: 4) {

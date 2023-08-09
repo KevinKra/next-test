@@ -8,6 +8,7 @@ interface IHeroProduct {
   description: string;
   images: { node: { id: string; altText?: string; originalSrc: string } }[];
   price: string;
+  available: boolean;
 }
 
 const HeroProduct = ({
@@ -16,6 +17,7 @@ const HeroProduct = ({
   description,
   images,
   price,
+  available,
 }: IHeroProduct) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [pauseCycle, setPauseCycle] = useState(false);
@@ -60,27 +62,38 @@ const HeroProduct = ({
         </div>
       </div>
       {/* product information section */}
-      <aside className={`flex flex-col gap-y-4`}>
-        <h2 className="text-3xl sm:text-4xl font-bold underline decoration-rose-400 underline-offset-3">
-          {title}
-        </h2>
-        <p className="w-full line-clamp-4 sm:line-clamp-5 sm:w-4/5 text-sm sm:text-base sm:font-light">
-          {description}
-        </p>
-        <div className="flex gap-6 flex-col sm:flex-row mt-4 sm:mt-8 w-full md:w-3/5">
+      <aside>
+        <div className={`flex flex-col gap-y-6`}>
+          <h2 className="text-3xl sm:text-4xl font-bold underline decoration-rose-400 underline-offset-3">
+            {title}
+          </h2>
+          <p className="w-full line-clamp-4 sm:line-clamp-5 sm:w-4/5 text-sm sm:text-base sm:font-light">
+            {description}
+          </p>
+          <div className="lowercase font-light">
+            <p>
+              starting at at <span className="font-bold">${price}</span>
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-6 flex-col sm:flex-row mt-4 sm:mt-10 w-full md:w-3/5">
           <Button
             outlined
             showButtonMirror
-            text={`only $${price}`}
+            text={available ? `only $${price}` : "sold out"}
             action={() => {}}
             fullWidth
+            disabled={!available}
           />
-          <Button
-            showButtonMirror
-            text={`add to cart`}
-            action={() => {}}
-            fullWidth
-          />
+          {available && (
+            <Button
+              showButtonMirror
+              text={`add to cart`}
+              action={() => {}}
+              fullWidth
+              disabled={!available}
+            />
+          )}
         </div>
       </aside>
     </section>
