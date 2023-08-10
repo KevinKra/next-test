@@ -8,6 +8,7 @@ const CartModal = () => {
   const onClose = useCart((state) => state.onClose);
   const clearCart = useCart((state) => state.clearCart);
   const items = useCart((state) => state.items);
+  const cartTotal = useCart((state) => state.cartTotal);
 
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
@@ -34,7 +35,7 @@ const CartModal = () => {
           >
             <p>
               cart total:{" "}
-              <span className="font-bold text-rose-500">$350.50</span>
+              <span className="font-bold text-rose-500">${cartTotal}</span>
             </p>
           </div>
         ) : null}

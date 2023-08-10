@@ -16,6 +16,10 @@ interface CartStore {
    */
   items: CartItem[];
   /**
+   * total combined value of all the cart items.
+   */
+  cartTotal: number;
+  /**
    * adds new items or increments (count and price) of existing items in the cart.
    */
   addCartItem: (newItem: Omit<CartItem, "count">) => void;
@@ -37,7 +41,9 @@ const useCart = create<CartStore>((set, get) => ({
 
   // cart state and logic
   items: [],
+  cartTotal: 0,
   addCartItem: (newItem) => {
+    const cartTotal = get().cartTotal;
     const cartItems = get().items;
     const cartItemsClone = cloneDeep(cartItems);
 
@@ -53,21 +59,32 @@ const useCart = create<CartStore>((set, get) => ({
       foundItem.price = (
         parseFloat(foundItem.price) + parseFloat(newItem.price)
       ).toFixed(2);
+      // cartTotal + parseFloat(newItem.price);
     } else {
       // else, add new item
       cartItemsClone.push({ ...newItem, count: 1 });
+      // cartTotal + parseFloat(newItem.price);
     }
-
-    set({ items: cartItemsClone });
+    set({
+      items: cartItemsClone,
+      cartTotal: cartTotal + parseFloat(newItem.price),
+    });
   },
   removeCartItem: (itemId) => {
+    const cartTotal = get().cartTotal;
     const cartItems = get().items;
-    const cartItemsClone = cloneDeep(cartItems);
 
-    const filteredCartItems = cartItemsClone.filter(
-      (item) => item.id !== itemId,
-    );
-    set({ items: filteredCartItems });
+    let removeItemsPrice: string;
+
+    const filteredCartItems = cartItems.filter((item) => {
+      if (item.id === itemId) removeItemsPrice = item.price;
+      return item.id !== itemId;
+    });
+
+    set({
+      items: filteredCartItems,
+      cartTotal: cartTotal - parseFloat(removeItemsPrice),
+    });
   },
   clearCart: () => set({ items: [] }),
 }));
