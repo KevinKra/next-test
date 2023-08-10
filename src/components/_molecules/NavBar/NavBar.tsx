@@ -1,5 +1,7 @@
 import useCart from "../../../hooks/useCart/useCart";
-import Button from "../../_atoms/Button/Button";
+// import Button from "../../_atoms/Button/Button";
+import MdiCart from "~icons/mdi/cart.jsx";
+import Icon from "../../_atoms/Icon/Icon";
 
 const NavBar = () => {
   const onOpen = useCart((state) => state.onOpen);
@@ -11,7 +13,9 @@ const NavBar = () => {
           Convert_Threads
         </h1>
         <div>
-          <Button outlined text="cart" action={onOpen} />
+          <Icon onClick={onOpen}>
+            <MdiCart style={{ fontSize: "1.2rem" }} />
+          </Icon>
         </div>
       </div>
     </nav>
