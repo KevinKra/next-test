@@ -16,7 +16,10 @@ const CartItem = ({ item }: ICartItem) => {
   };
 
   return (
-    <div key={item.id} className="flex w-full justify-between gap-x-2 border">
+    <div
+      key={item.id}
+      className="flex w-full justify-between gap-x-2 border border-black"
+    >
       <div className="w-fit border-r">
         <ProductImage
           noShadow
@@ -25,13 +28,15 @@ const CartItem = ({ item }: ICartItem) => {
           width={150}
         />
       </div>
-      <aside className="w-full p-2">
-        <h3 className="text-xl font-medium">{item.title}</h3>
-        <div className="flex gap-x-2">
-          <p className="text-sm">total x {item.count}</p>
-          <p>${item.price}</p>
+      <aside className="flex w-full p-2">
+        <div className="grow">
+          <h3 className="text-xl font-medium">{item.title}</h3>
+          <div className="flex items-center gap-x-2 text-sm">
+            <p>total x {item.count}</p>
+            <p className="font-bold">${item.price}</p>
+          </div>
         </div>
-        <div>
+        <div className="mr-1 mt-1">
           <Icon onClick={handleRemoveItem}>
             <MdiWindowClose style={{ fontSize: "1rem" }} />
           </Icon>

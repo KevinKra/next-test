@@ -25,7 +25,7 @@ const Modal = ({ isOpen, onClose, children }: IModal) => {
   }
 
   return (
-    <div className="fixed top-0 z-40">
+    <div className="fixed top-0 z-50">
       <div onClick={handleClose} className="h-screen w-screen bg-black/40" />
       <div
         className={`
