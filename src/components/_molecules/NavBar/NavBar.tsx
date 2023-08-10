@@ -7,7 +7,7 @@ const NavBar = () => {
   const cartTotal = useCart((state) => state.cartTotal);
 
   return (
-    <nav className="flex h-14 w-full border-b bg-black sm:h-16 sm:bg-white">
+    <nav className="sticky top-0 z-50 flex h-14 w-full border-b bg-black sm:h-16 sm:bg-white">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-x-4 px-4">
         <h1
           className="

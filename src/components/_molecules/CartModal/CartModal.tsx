@@ -42,14 +42,22 @@ const CartModal = () => {
           </div>
         ) : null}
         <div className="relative my-4 flex w-full flex-col gap-4 sm:flex-row">
-          <Button fullWidth outlined text="clear cart" action={clearCart} />
-          <Button
-            fullWidth
-            disabled={!items.length}
-            showButtonMirror
-            text="checkout"
-            action={() => {}}
-          />
+          {!items.length ? (
+            <>
+              <Button fullWidth text="close" action={onClose} />
+            </>
+          ) : (
+            <>
+              <Button fullWidth outlined text="clear cart" action={clearCart} />
+              <Button
+                fullWidth
+                disabled={!items.length}
+                showButtonMirror
+                text="checkout"
+                action={() => {}}
+              />
+            </>
+          )}
         </div>
       </div>
     </Modal>
