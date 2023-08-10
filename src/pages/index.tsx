@@ -14,6 +14,7 @@ interface PageData {
 }
 
 export default function Home({ product, products }: PageData) {
+  console.dir(products, { depth: null });
   return (
     <div className="flex min-h-screen flex-col">
       <NavBar />
@@ -26,7 +27,9 @@ export default function Home({ product, products }: PageData) {
             price: product.priceRange.minVariantPrice.amount,
           }}
         />
-        <ProductRow title="Trending Tops" products={products} />
+        <div className="flex flex-col gap-y-12">
+          <ProductRow title="Trending Tops" products={products} />
+        </div>
       </main>
       <footer className="mt-24 grid h-64 place-items-center border-t bg-black">
         <p className="p-4 text-sm font-light text-white sm:p-2">

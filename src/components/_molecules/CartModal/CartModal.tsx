@@ -45,10 +45,12 @@ const CartModal = () => {
             </Icon>
           </div>
           {/* cart items */}
-          <div className="flex w-full flex-col gap-y-4 overflow-y-scroll">
-            {items.map((item) => (
-              <CartItem key={item.id} item={item} />
-            ))}
+          <div className="max-h-[30rem] w-full py-2">
+            <div className="box-border flex flex-col gap-y-4 ">
+              {items.map((item) => (
+                <CartItem key={item.id} item={item} />
+              ))}
+            </div>
           </div>
           {/* cart total */}
           <div
