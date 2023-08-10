@@ -1,9 +1,9 @@
 import Modal from "../Modal/Modal";
 import useCart from "../../../hooks/useCart/useCart";
-import ProductImage from "../ProductImage/ProductImage";
 import Button from "../../_atoms/Button/Button";
+import CartItem from "../CartItem/CartItem";
 
-const Cart = () => {
+const CartModal = () => {
   const isOpen = useCart((state) => state.isOpen);
   const onClose = useCart((state) => state.onClose);
   const clearCart = useCart((state) => state.clearCart);
@@ -13,30 +13,7 @@ const Cart = () => {
     <Modal onClose={onClose} isOpen={isOpen}>
       <div className="grid w-full place-items-center gap-y-2 border bg-white p-4 sm:w-[30rem]">
         {items.length ? (
-          items.map((item) => {
-            return (
-              <div
-                key={item.id}
-                className="flex w-full justify-between gap-x-2 border"
-              >
-                <div className="w-fit border-r">
-                  <ProductImage
-                    noShadow
-                    title={item.title}
-                    image={item.images[0]}
-                    width={150}
-                  />
-                </div>
-                <aside className="w-full p-2">
-                  <h3 className="text-xl font-medium">{item.title}</h3>
-                  <div className="flex gap-x-2">
-                    <p className="text-sm">total x {item.count}</p>
-                    <p>${item.price}</p>
-                  </div>
-                </aside>
-              </div>
-            );
-          })
+          items.map((item) => <CartItem key={item.id} item={item} />)
         ) : (
           <div className="grid w-full select-none place-items-center border border-black p-8">
             <p>cart is currently empty</p>
@@ -76,4 +53,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartModal;

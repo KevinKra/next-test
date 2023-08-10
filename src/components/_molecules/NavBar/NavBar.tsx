@@ -1,5 +1,4 @@
 import useCart from "../../../hooks/useCart/useCart";
-// import Button from "../../_atoms/Button/Button";
 import MdiCart from "~icons/mdi/cart.jsx";
 import Icon from "../../_atoms/Icon/Icon";
 

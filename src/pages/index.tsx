@@ -1,4 +1,4 @@
-import Cart from "../components/_molecules/Cart/Cart";
+import CartModal from "../components/_molecules/CartModal/CartModal";
 import NavBar from "../components/_molecules/NavBar/NavBar";
 import ProductHero from "../components/_molecules/ProductHero/ProductHero";
 import ProductRow from "../components/_molecules/ProductRow/ProductRow";
@@ -18,7 +18,7 @@ export default function Home({ product, products }: PageData) {
   return (
     <div className="flex min-h-screen flex-col">
       <NavBar />
-      <Cart />
+      <CartModal />
       <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10">
         <ProductHero
           product={{

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { Product } from "../../types";
 import cloneDeep from "clone-deep";
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
   count: number;
 }
 
