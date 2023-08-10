@@ -55,6 +55,7 @@ const ProductCard = ({ product }: IProductCard) => {
           <Button
             fullWidth
             text="add to cart"
+            toastMessage="item added to cart"
             action={() => addCartItem(product)}
           />
         </div>

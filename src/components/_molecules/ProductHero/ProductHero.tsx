@@ -12,6 +12,7 @@ const ProductHero = ({ product }: IProductHero) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [pauseCycle, setPauseCycle] = useState(false);
   const addCartItem = useCart((state) => state.addCartItem);
+  const cartTotal = useCart((state) => state.cartTotal);
 
   useEffect(() => {
     // useEffect handles the cycling of images
@@ -74,13 +75,14 @@ const ProductHero = ({ product }: IProductHero) => {
         <div className="mt-4 flex w-full flex-col gap-6 md:mt-10 md:flex-row lg:w-4/5">
           <Button
             outlined
-            showButtonMirror
+            showDecoration
             text={`only $${product.price}`}
             action={() => addCartItem(product)}
             fullWidth
           />
           <Button
-            showButtonMirror
+            showDecoration
+            toastMessage={`item added to cart`}
             text={`add to cart`}
             fullWidth
             action={() => addCartItem(product)}

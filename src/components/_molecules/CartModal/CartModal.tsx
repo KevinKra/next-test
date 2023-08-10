@@ -76,7 +76,8 @@ const CartModal = () => {
             <Button
               fullWidth
               disabled={!items.length}
-              showButtonMirror
+              showDecoration
+              toastMessage="simulate: item checkout"
               text="checkout"
               action={() => {}}
             />
