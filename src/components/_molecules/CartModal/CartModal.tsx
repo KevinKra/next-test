@@ -35,7 +35,9 @@ const CartModal = () => {
           >
             <p>
               cart total:{" "}
-              <span className="font-bold text-rose-500">${cartTotal}</span>
+              <span className="font-bold text-rose-500">
+                ${cartTotal.toFixed(2)}
+              </span>
             </p>
           </div>
         ) : null}

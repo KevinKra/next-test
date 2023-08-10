@@ -86,7 +86,7 @@ const useCart = create<CartStore>((set, get) => ({
       cartTotal: cartTotal - parseFloat(removeItemsPrice),
     });
   },
-  clearCart: () => set({ items: [] }),
+  clearCart: () => set({ items: [], cartTotal: 0 }),
 }));
 
 export default useCart;
