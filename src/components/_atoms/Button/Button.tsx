@@ -44,7 +44,7 @@ const Button = ({
       <div className="border border-black bg-white p-4 shadow-lg">
         <p>{toastMessage}</p>
       </div>,
-      { position: "bottom-center" },
+      { position: "bottom-right" },
     );
 
   const handleKeyUp = (e?: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -68,7 +68,6 @@ const Button = ({
         className={`
           relative
           z-20
-          cursor-pointer
           p-4
           px-6
           font-medium
@@ -82,7 +81,7 @@ const Button = ({
           ${
             disabled &&
             outlined &&
-            "text-rose-500 hover:bg-white active:bg-white"
+            "cursor-default hover:bg-white active:bg-white"
           }
           ${disabled && !outlined && "text-gray-400 line-through"}
       `}

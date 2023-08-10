@@ -75,9 +75,10 @@ const ProductHero = ({ product }: IProductHero) => {
           <Button
             outlined
             showDecoration
+            disabled
             text={`only $${product.price}`}
-            toastMessage={`item added to cart`}
-            action={() => addCartItem(product)}
+            // toastMessage={`item added to cart`}
+            action={() => {}}
             fullWidth
           />
           <Button
