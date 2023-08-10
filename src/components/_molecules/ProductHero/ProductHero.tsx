@@ -12,7 +12,6 @@ const ProductHero = ({ product }: IProductHero) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [pauseCycle, setPauseCycle] = useState(false);
   const addCartItem = useCart((state) => state.addCartItem);
-  const cartTotal = useCart((state) => state.cartTotal);
 
   useEffect(() => {
     // useEffect handles the cycling of images

@@ -26,9 +26,9 @@ export default function Home({ product, products }: PageData) {
             price: product.priceRange.minVariantPrice.amount,
           }}
         />
-        <ProductRow products={products} />
+        <ProductRow title="Trending Tops" products={products} />
       </main>
-      <footer className="mt-8 grid h-24 place-items-center border-t bg-black">
+      <footer className="mt-24 grid h-64 place-items-center border-t bg-black">
         <p className="p-4 text-sm font-light text-white sm:p-2">
           shop your favorite brands at convert_threads
         </p>
