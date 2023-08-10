@@ -1,17 +1,15 @@
 import ProductImage from "../ProductImage/ProductImage";
-import Button from "../_atoms/Button/Button";
-import { ItemImage } from "../../types";
+import Button from "../../_atoms/Button/Button";
+import { Product } from "../../../types";
+import useCart from "../../../hooks/useCart/useCart";
 
 interface IProductCard {
-  id: string;
-  title: string;
-  description: string;
-  handle: string;
-  image: ItemImage[];
-  price: string;
+  product: Product;
 }
 
-const ProductCard = ({ title, description, image, price }: IProductCard) => {
+const ProductCard = ({ product }: IProductCard) => {
+  const addCartItem = useCart((state) => state.addCartItem);
+
   return (
     <div
       className="
@@ -33,19 +31,32 @@ const ProductCard = ({ title, description, image, price }: IProductCard) => {
     >
       {/* card image */}
       <div className="h-fit border-2 border-rose-500">
-        <ProductImage noShadow width={500} title={title} image={image[0]} />
+        <ProductImage
+          noShadow
+          width={500}
+          title={product.title}
+          image={product.images[0]}
+        />
       </div>
       {/* card body */}
       <div className="flex h-full flex-col gap-y-2 lg:gap-y-4">
-        <h4 className="w-1/5 text-xl font-bold md:w-full lg:w-1/5">{title}</h4>
-        <p className="line-clamp-3 w-4/5 font-light md:hidden">{description}</p>
+        <h4 className="w-1/5 text-xl font-bold md:w-full lg:w-1/5">
+          {product.title}
+        </h4>
+        <p className="line-clamp-3 w-4/5 font-light md:hidden">
+          {product.description}
+        </p>
         <div className="mb-4 font-light lowercase">
           <p>
-            <span className="font-medium">${price}</span>
+            <span className="font-medium">${product.price}</span>
           </p>
         </div>
         <div className="mt-auto w-full">
-          <Button fullWidth text="add to cart" action={() => {}} />
+          <Button
+            fullWidth
+            text="add to cart"
+            action={() => addCartItem(product)}
+          />
         </div>
       </div>
       {/* absolute styled design element */}

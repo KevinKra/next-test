@@ -34,36 +34,36 @@ const Button = ({
 }: IButton) => {
   const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Enter") {
-      console.log("Enter pressed");
       action();
     }
   };
 
   return (
-    <div className="relative w-full h-fit">
+    <div className="relative h-fit w-full">
       {showButtonMirror && (
-        <div className="z-[-1] -translate-x-2 translate-y-2 absolute bg-rose-500 h-full w-full" />
+        <div className="absolute z-10 h-full w-full -translate-x-2 translate-y-2 bg-rose-500" />
       )}
       <button
         className={`
-        font-medium
-        p-4
-        px-6
-        transition
-        ${fullWidth ? "w-full" : "w-fit"}
-        ${
-          outlined
-            ? "bg-white text-black border border-black hover:bg-gray-50 active:bg-gray-100"
-            : "bg-black text-white hover:bg-gray-900 active:bg-gray-800"
-        }
-        ${
-          disabled && outlined && "text-rose-500 hover:bg-white active:bg-white"
-        }
-        ${
-          disabled &&
-          !outlined &&
-          "text-gray-400 bg-gray-700 hover:bg-gray-700 active:bg-gray-700 line-through"
-        }
+          relative
+          z-20
+          cursor-pointer
+          p-4
+          px-6
+          font-medium
+          transition
+          ${fullWidth ? "w-full" : "w-fit"}
+          ${
+            outlined
+              ? "border border-black bg-white text-black hover:bg-gray-50 active:bg-gray-100"
+              : "border border-black bg-black text-white hover:bg-gray-900 active:bg-gray-800"
+          }
+          ${
+            disabled &&
+            outlined &&
+            "text-rose-500 hover:bg-white active:bg-white"
+          }
+          ${disabled && !outlined && "text-gray-400 line-through"}
       `}
         disabled={disabled}
         onClick={action}

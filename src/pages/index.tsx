@@ -1,30 +1,31 @@
-import Head from "next/head";
-import ProductHero from "../components/ProductHero/ProductHero";
-import ProductRow from "../components/ProductRow/ProductRow";
+import CartModal from "../components/_molecules/CartModal/CartModal";
+import NavBar from "../components/_molecules/NavBar/NavBar";
+import ProductHero from "../components/_molecules/ProductHero/ProductHero";
+import ProductRow from "../components/_molecules/ProductRow/ProductRow";
+import { PAGE_QUERY } from "../gql/queries/productsPage";
+import { ProductApiResponse } from "../types";
 import { storeFront } from "../utils";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Home({ product, products }: any) {
-  console.log("products::", product, products);
+interface PageData {
+  product: ProductApiResponse;
+  products: {
+    node: ProductApiResponse;
+  }[];
+}
+
+export default function Home({ product, products }: PageData) {
+  // console.log("products::", product, products);
   return (
     <div className="flex min-h-screen flex-col">
-      <Head>
-        <title>Convert_Threads</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <nav className="grid h-12 w-full place-items-center border-b bg-black px-4 text-center sm:h-16 sm:bg-white sm:px-2">
-        <h1 className="cursor-pointer text-lg font-bold text-white sm:text-2xl sm:text-black">
-          Convert_Threads
-        </h1>
-      </nav>
+      <NavBar />
+      <CartModal />
       <main className="mx-auto mt-4 flex max-w-7xl grow flex-col gap-y-24 px-4 sm:mt-10">
         <ProductHero
-          id={product.id}
-          title={product.title}
-          description={product.description}
-          images={product.images.edges}
-          price={product.priceRange.minVariantPrice.amount}
-          available={product.availableForSale}
+          product={{
+            ...product,
+            images: product.images.edges,
+            price: product.priceRange.minVariantPrice.amount,
+          }}
         />
         <ProductRow products={products} />
       </main>
@@ -37,70 +38,12 @@ export default function Home({ product, products }: any) {
   );
 }
 
-// todo - give me a home
-const gql = String.raw;
-
-const PAGE_QUERY = gql`
-  query SingleProduct($handle: String!) {
-    productByHandle(handle: $handle) {
-      id
-      title
-      description
-      availableForSale
-      handle
-      tags
-      priceRange {
-        minVariantPrice {
-          amount
-        }
-      }
-      images(first: 4) {
-        edges {
-          node {
-            id
-            altText
-            originalSrc
-          }
-        }
-      }
-    }
-    products(first: 3) {
-      edges {
-        node {
-          id
-          availableForSale
-          title
-          description
-          vendor
-          productType
-          priceRange {
-            minVariantPrice {
-              amount
-            }
-          }
-          images(first: 1) {
-            edges {
-              node {
-                id
-                altText
-                originalSrc
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 // prep-halterneck-top-blue
 // callie-halterneck-top-blue
 // mandala-halterneck-top-blue
 // bounds-short-blue-206
 
 export async function getStaticProps() {
-  // const { data } = await storeFront(PRODUCTS_QUERY);
-  // return { props: { products: data.products } };
   const { data } = await storeFront(PAGE_QUERY, {
     handle: "mandala-halterneck-top-blue",
   });

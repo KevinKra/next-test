@@ -1,8 +1,8 @@
-import React from "react";
 import ProductCard from "../ProductCard/ProductCard";
+import { ProductApiResponse } from "../../../types";
 
 interface IProductRow {
-  products: unknown[];
+  products: { node: ProductApiResponse }[];
 }
 
 const ProductRow = ({ products }: IProductRow) => {
@@ -11,12 +11,11 @@ const ProductRow = ({ products }: IProductRow) => {
       {products.map(({ node: product }) => (
         <ProductCard
           key={product.id}
-          id={product.id}
-          title={product.title}
-          description={product.description}
-          handle={product.handle}
-          image={product.images.edges}
-          price={product.priceRange.minVariantPrice.amount}
+          product={{
+            ...product,
+            images: product.images.edges,
+            price: product.priceRange.minVariantPrice.amount,
+          }}
         />
       ))}
     </section>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ItemImage } from "../../types";
+import { ItemImage } from "../../../types";
 
 interface IProductImage {
   /**
@@ -29,7 +29,7 @@ const ProductImage = ({
   width = 100,
   hero,
   active,
-  defaultBorder,
+  defaultBorder = false,
   noShadow,
   action,
 }: IProductImage) => {
@@ -40,13 +40,12 @@ const ProductImage = ({
         h-fit
         transition
         duration-200
-        ${active ? "border-black/30" : "border-slate-200"}
+        ${defaultBorder && "border"}
         ${
           hero
-            ? "cursor-default border-rose-400 shadow-lg"
+            ? "cursor-default border border-rose-400 shadow-lg"
             : "cursor-pointer shadow-md"
         }
-        ${defaultBorder && "border"}
         ${noShadow && "shadow-none"}
       `}
       onClick={action}

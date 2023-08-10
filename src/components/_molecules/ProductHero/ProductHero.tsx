@@ -1,39 +1,30 @@
 import { useEffect, useState } from "react";
-import { ItemImage } from "../../types";
+import useCart from "../../../hooks/useCart/useCart";
+import { Product } from "../../../types";
 import ProductImage from "../ProductImage/ProductImage";
-import Button from "../_atoms/Button/Button";
+import Button from "../../_atoms/Button/Button";
 
 interface IProductHero {
-  id: string;
-  title: string;
-  description: string;
-  images: ItemImage[];
-  price: string;
-  available: boolean;
+  product: Product;
 }
 
-const HeroProduct = ({
-  id,
-  title,
-  description,
-  images,
-  price,
-}: IProductHero) => {
+const ProductHero = ({ product }: IProductHero) => {
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const [pauseCycle, setPauseCycle] = useState(false);
+  const addCartItem = useCart((state) => state.addCartItem);
 
   useEffect(() => {
     // useEffect handles the cycling of images
     const imagesCycler = setInterval(() => {
       if (pauseCycle) return;
 
-      currentImageIdx < images.length - 1
+      currentImageIdx < product.images.length - 1
         ? setCurrentImageIdx((i) => i + 1)
         : setCurrentImageIdx(0);
     }, 2500);
     // useEffect interval cleanup
     return () => clearInterval(imagesCycler);
-  }, [currentImageIdx, pauseCycle, images.length]);
+  }, [currentImageIdx, pauseCycle, product.images.length]);
 
   const handleImageSelect = (index: number) => {
     setPauseCycle(true);
@@ -42,22 +33,21 @@ const HeroProduct = ({
 
   return (
     <section
-      key={id}
+      key={product.id}
       className="grid grid-cols-1 gap-6 border-red-400 md:grid-cols-2 md:gap-12"
     >
       {/* product images section */}
       <div className="flex gap-x-2">
         <ProductImage
           hero
-          defaultBorder
-          title={title}
-          image={images[currentImageIdx]}
+          title={product.title}
+          image={product.images[currentImageIdx]}
         />
         <div className="flex flex-col gap-1">
-          {images.map((image, i) => (
+          {product.images.map((image, i) => (
             <ProductImage
               key={image.node.id}
-              title={title}
+              title={product.title}
               image={image}
               active={i === currentImageIdx}
               action={() => handleImageSelect(i)}
@@ -70,14 +60,14 @@ const HeroProduct = ({
       <aside>
         <div className="flex flex-col gap-y-6">
           <h2 className="underline-offset-3 text-3xl font-bold underline decoration-rose-400 md:text-4xl">
-            {title}
+            {product.title}
           </h2>
           <p className="line-clamp-4 w-full text-sm md:line-clamp-5 md:w-4/5 md:text-base md:font-light">
-            {description}
+            {product.description}
           </p>
           <div className="font-light lowercase">
             <p>
-              starting at at <span className="font-bold">${price}</span>
+              starting at at <span className="font-bold">${product.price}</span>
             </p>
           </div>
         </div>
@@ -85,15 +75,15 @@ const HeroProduct = ({
           <Button
             outlined
             showButtonMirror
-            text={`only $${price}`}
-            action={() => {}}
+            text={`only $${product.price}`}
+            action={() => addCartItem(product)}
             fullWidth
           />
           <Button
             showButtonMirror
             text={`add to cart`}
-            action={() => {}}
             fullWidth
+            action={() => addCartItem(product)}
           />
           {/* discovery revealed items from api are not available, otherwise see below ... */}
           {/* <Button
@@ -119,4 +109,4 @@ const HeroProduct = ({
   );
 };
 
-export default HeroProduct;
+export default ProductHero;
