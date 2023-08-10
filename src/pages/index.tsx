@@ -14,7 +14,10 @@ interface PageData {
 }
 
 export default function Home({ product, products }: PageData) {
-  console.dir(products, { depth: null });
+  const nonHeroProducts = products
+    .filter((item) => item.node.handle !== product.handle)
+    .slice(0, 3);
+
   return (
     <div className="flex min-h-screen flex-col">
       <NavBar />
@@ -28,7 +31,7 @@ export default function Home({ product, products }: PageData) {
           }}
         />
         <div className="flex flex-col gap-y-12">
-          <ProductRow title="Trending Tops" products={products} />
+          <ProductRow title="Trending Fashion" products={nonHeroProducts} />
         </div>
       </main>
       <footer className="mt-24 grid h-64 place-items-center border-t bg-black">

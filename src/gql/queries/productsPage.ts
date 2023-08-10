@@ -25,7 +25,7 @@ export const PAGE_QUERY = gql`
         }
       }
     }
-    products(first: 3) {
+    products(first: 5) {
       edges {
         node {
           id
