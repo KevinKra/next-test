@@ -87,24 +87,6 @@ const ProductHero = ({ product }: IProductHero) => {
             fullWidth
             action={() => addCartItem(product)}
           />
-          {/* discovery revealed items from api are not available, otherwise see below ... */}
-          {/* <Button
-            outlined
-            showButtonMirror
-            text={available ? `only $${price}` : "sold out"}
-            action={() => {}}
-            fullWidth
-            disabled={!available}
-          />
-          {available && (
-            <Button
-              showButtonMirror
-              text={`add to cart`}
-              action={() => {}}
-              fullWidth
-              disabled={!available}
-            />
-          )} */}
         </div>
       </aside>
     </section>

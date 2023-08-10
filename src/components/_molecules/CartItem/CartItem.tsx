@@ -1,4 +1,3 @@
-import React from "react";
 import useCart, { CartItem } from "../../../hooks/useCart/useCart";
 import Icon from "../../_atoms/Icon/Icon";
 import ProductImage from "../ProductImage/ProductImage";

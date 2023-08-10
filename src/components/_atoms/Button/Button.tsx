@@ -19,7 +19,7 @@ interface IButton {
    */
   showDecoration?: boolean;
   /**
-   * when message provided, toast message will trigger
+   * when `toastMessage` provided, toast message will trigger on action
    */
   toastMessage?: string;
   outlined?: boolean;
@@ -38,6 +38,7 @@ const Button = ({
   disabled,
   action,
 }: IButton) => {
+  // custom toast that appears on button click --if conditions met
   const buttonToast = () =>
     toast.custom(
       <div className="border border-black bg-white p-4 shadow-lg">
