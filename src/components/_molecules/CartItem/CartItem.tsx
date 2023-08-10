@@ -20,7 +20,7 @@ const CartItem = ({ item }: ICartItem) => {
       key={item.id}
       className="flex w-full justify-between gap-x-2 border border-black"
     >
-      <div className="w-fit border-r">
+      <div className="w-fit border-r border-black">
         <ProductImage noShadow title={item.title} image={item.images[0]} />
       </div>
       <aside className="flex w-full p-2">

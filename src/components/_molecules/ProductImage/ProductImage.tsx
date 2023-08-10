@@ -40,10 +40,10 @@ const ProductImage = ({
         h-fit
         transition
         duration-200
-        ${defaultBorder && "border"}
+        ${defaultBorder && "border border-gray-500"}
         ${
           hero
-            ? "cursor-default border border-rose-400 shadow-lg"
+            ? "cursor-default border border-black shadow-lg"
             : "cursor-pointer shadow-md"
         }
         ${noShadow && "shadow-none"}
