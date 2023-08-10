@@ -33,11 +33,12 @@ const Modal = ({ isOpen, onClose, children }: IModal) => {
           left-1/2
           top-1/2
           z-20
-          w-fit
+          w-[90%]
           -translate-x-1/2
-          overflow-hidden 
-          shadow-lg
-          duration-300 
+          overflow-hidden
+          shadow-lg 
+          duration-300
+          sm:w-fit 
           ${showModal ? "-translate-y-1/2" : "translate-y-full"}
           ${showModal ? "opacity-100" : "opacity-0"}
       `}

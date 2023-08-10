@@ -47,6 +47,7 @@ const Button = ({
         className={`
           relative
           z-20
+          cursor-pointer
           p-4
           px-6
           font-medium
@@ -62,11 +63,7 @@ const Button = ({
             outlined &&
             "text-rose-500 hover:bg-white active:bg-white"
           }
-          ${
-            disabled &&
-            !outlined &&
-            "bg-gray-700 text-gray-400 line-through hover:bg-gray-700 active:bg-gray-700"
-          }
+          ${disabled && !outlined && "text-gray-400 line-through"}
       `}
         disabled={disabled}
         onClick={action}
