@@ -74,16 +74,16 @@ const useCart = create<CartStore>((set, get) => ({
     const cartTotal = get().cartTotal;
     const cartItems = get().items;
 
-    let removeItemsPrice: string;
+    let removedItemsPrice: string;
 
     const filteredCartItems = cartItems.filter((item) => {
-      if (item.id === itemId) removeItemsPrice = item.price;
+      if (item.id === itemId) removedItemsPrice = item.price;
       return item.id !== itemId;
     });
 
     set({
       items: filteredCartItems,
-      cartTotal: cartTotal - parseFloat(removeItemsPrice),
+      cartTotal: cartTotal - parseFloat(removedItemsPrice),
     });
   },
   clearCart: () => set({ items: [], cartTotal: 0 }),

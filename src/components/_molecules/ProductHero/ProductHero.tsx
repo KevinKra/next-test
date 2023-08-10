@@ -74,35 +74,20 @@ const ProductHero = ({ product }: IProductHero) => {
         <div className="mt-4 flex w-full flex-col gap-6 md:mt-10 md:flex-row lg:w-4/5">
           <Button
             outlined
-            showButtonMirror
+            showDecoration
+            disabled
             text={`only $${product.price}`}
-            action={() => addCartItem(product)}
+            // toastMessage={`item added to cart`}
+            action={() => {}}
             fullWidth
           />
           <Button
-            showButtonMirror
+            showDecoration
+            toastMessage={`item added to cart`}
             text={`add to cart`}
             fullWidth
             action={() => addCartItem(product)}
           />
-          {/* discovery revealed items from api are not available, otherwise see below ... */}
-          {/* <Button
-            outlined
-            showButtonMirror
-            text={available ? `only $${price}` : "sold out"}
-            action={() => {}}
-            fullWidth
-            disabled={!available}
-          />
-          {available && (
-            <Button
-              showButtonMirror
-              text={`add to cart`}
-              action={() => {}}
-              fullWidth
-              disabled={!available}
-            />
-          )} */}
         </div>
       </aside>
     </section>

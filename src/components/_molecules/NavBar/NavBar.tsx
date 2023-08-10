@@ -23,7 +23,19 @@ const NavBar = () => {
         </h1>
         <div
           onClick={onOpen}
-          className="flex cursor-pointer items-center gap-x-4 rounded border p-2 text-white sm:text-gray-800"
+          className="
+            border-white-500 
+            flex 
+            cursor-pointer 
+            items-center 
+            gap-x-4 
+            rounded 
+            border 
+            p-2 
+            text-white 
+            sm:border-gray-800
+            sm:text-gray-800
+          "
         >
           <Icon>
             <MdiCart style={{ fontSize: "1.2rem" }} />

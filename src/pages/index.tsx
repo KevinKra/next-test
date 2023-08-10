@@ -14,7 +14,10 @@ interface PageData {
 }
 
 export default function Home({ product, products }: PageData) {
-  // console.log("products::", product, products);
+  const nonHeroProducts = products
+    .filter((item) => item.node.handle !== product.handle)
+    .slice(0, 3);
+
   return (
     <div className="flex min-h-screen flex-col">
       <NavBar />
@@ -27,9 +30,11 @@ export default function Home({ product, products }: PageData) {
             price: product.priceRange.minVariantPrice.amount,
           }}
         />
-        <ProductRow products={products} />
+        <div className="flex flex-col gap-y-12">
+          <ProductRow title="Trending Fashion" products={nonHeroProducts} />
+        </div>
       </main>
-      <footer className="mt-8 grid h-24 place-items-center border-t bg-black">
+      <footer className="mt-24 grid h-64 place-items-center border-t bg-black">
         <p className="p-4 text-sm font-light text-white sm:p-2">
           shop your favorite brands at convert_threads
         </p>
@@ -37,11 +42,6 @@ export default function Home({ product, products }: PageData) {
     </div>
   );
 }
-
-// prep-halterneck-top-blue
-// callie-halterneck-top-blue
-// mandala-halterneck-top-blue
-// bounds-short-blue-206
 
 export async function getStaticProps() {
   const { data } = await storeFront(PAGE_QUERY, {

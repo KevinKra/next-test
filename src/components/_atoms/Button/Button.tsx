@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
+import toast from "react-hot-toast";
 
 interface IButton {
   text: string;
@@ -16,7 +17,11 @@ interface IButton {
   /**
    * when true, reveals a matching width div below the button for visual aesthetic
    */
-  showButtonMirror?: boolean;
+  showDecoration?: boolean;
+  /**
+   * when `toastMessage` provided, toast message will trigger on action
+   */
+  toastMessage?: string;
   outlined?: boolean;
   disabled?: boolean;
   action: () => void;
@@ -27,27 +32,42 @@ const Button = ({
   ariaLabel,
   type = "button",
   fullWidth,
-  showButtonMirror,
+  showDecoration,
+  toastMessage,
   outlined,
   disabled,
   action,
 }: IButton) => {
-  const handleKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+  // custom toast that appears on button click --if conditions met
+  const buttonToast = () =>
+    toast.custom(
+      <div className="border border-black bg-white p-4 shadow-lg">
+        <p>{toastMessage}</p>
+      </div>,
+      { position: "bottom-right" },
+    );
+
+  const handleKeyUp = (e?: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Enter") {
+      toastMessage && buttonToast();
       action();
     }
   };
 
+  const handleClick = () => {
+    toastMessage && buttonToast();
+    action();
+  };
+
   return (
     <div className="relative h-fit w-full">
-      {showButtonMirror && (
+      {showDecoration && (
         <div className="absolute z-10 h-full w-full -translate-x-2 translate-y-2 bg-rose-500" />
       )}
       <button
         className={`
           relative
           z-20
-          cursor-pointer
           p-4
           px-6
           font-medium
@@ -61,12 +81,12 @@ const Button = ({
           ${
             disabled &&
             outlined &&
-            "text-rose-500 hover:bg-white active:bg-white"
+            "cursor-default hover:bg-white active:bg-white"
           }
           ${disabled && !outlined && "text-gray-400 line-through"}
       `}
         disabled={disabled}
-        onClick={action}
+        onClick={handleClick}
         onKeyUp={handleKeyUp}
         aria-label={ariaLabel || text}
         type={type}
