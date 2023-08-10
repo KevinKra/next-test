@@ -14,7 +14,6 @@ interface PageData {
 }
 
 export default function Home({ product, products }: PageData) {
-  // console.log("products::", product, products);
   return (
     <div className="flex min-h-screen flex-col">
       <NavBar />

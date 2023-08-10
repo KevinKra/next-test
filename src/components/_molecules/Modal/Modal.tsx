@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 interface IModal {
   isOpen?: boolean;
   onClose: () => void;
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 const Modal = ({ isOpen, onClose, children }: IModal) => {
@@ -35,7 +35,6 @@ const Modal = ({ isOpen, onClose, children }: IModal) => {
           z-20
           w-[90%]
           -translate-x-1/2
-          overflow-hidden
           shadow-lg 
           duration-300
           sm:w-fit 

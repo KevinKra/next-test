@@ -21,16 +21,11 @@ const CartItem = ({ item }: ICartItem) => {
       className="flex w-full justify-between gap-x-2 border border-black"
     >
       <div className="w-fit border-r">
-        <ProductImage
-          noShadow
-          title={item.title}
-          image={item.images[0]}
-          width={150}
-        />
+        <ProductImage noShadow title={item.title} image={item.images[0]} />
       </div>
       <aside className="flex w-full p-2">
         <div className="grow">
-          <h3 className="text-xl font-medium">{item.title}</h3>
+          <h3 className="font-medium sm:text-xl">{item.title}</h3>
           <div className="flex items-center gap-x-2 text-sm">
             <p>total x {item.count}</p>
             <p className="font-bold">${item.price}</p>
