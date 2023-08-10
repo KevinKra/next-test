@@ -45,7 +45,7 @@ const CartModal = () => {
             </Icon>
           </div>
           {/* cart items */}
-          <div className="max-h-[30rem] w-full py-2">
+          <div className="overflow-scroll-y max-h-[20rem] w-full overflow-y-auto border-y border-black px-4  py-2 sm:max-h-[30rem]">
             <div className="box-border flex flex-col gap-y-4 ">
               {items.map((item) => (
                 <CartItem key={item.id} item={item} />

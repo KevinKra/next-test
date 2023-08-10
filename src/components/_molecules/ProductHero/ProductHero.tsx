@@ -76,6 +76,7 @@ const ProductHero = ({ product }: IProductHero) => {
             outlined
             showDecoration
             text={`only $${product.price}`}
+            toastMessage={`item added to cart`}
             action={() => addCartItem(product)}
             fullWidth
           />

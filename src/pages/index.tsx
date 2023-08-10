@@ -43,11 +43,6 @@ export default function Home({ product, products }: PageData) {
   );
 }
 
-// prep-halterneck-top-blue
-// callie-halterneck-top-blue
-// mandala-halterneck-top-blue
-// bounds-short-blue-206
-
 export async function getStaticProps() {
   const { data } = await storeFront(PAGE_QUERY, {
     handle: "mandala-halterneck-top-blue",
