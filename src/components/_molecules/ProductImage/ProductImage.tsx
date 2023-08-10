@@ -29,7 +29,7 @@ const ProductImage = ({
   width = 100,
   hero,
   active,
-  defaultBorder,
+  defaultBorder = false,
   noShadow,
   action,
 }: IProductImage) => {
@@ -44,7 +44,7 @@ const ProductImage = ({
         ${
           hero
             ? "cursor-default border border-rose-400 shadow-lg"
-            : "cursor-pointer border shadow-md"
+            : "cursor-pointer shadow-md"
         }
         ${noShadow && "shadow-none"}
       `}

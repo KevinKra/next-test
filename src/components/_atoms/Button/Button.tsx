@@ -41,28 +41,32 @@ const Button = ({
   return (
     <div className="relative h-fit w-full">
       {showButtonMirror && (
-        <div className="absolute z-[-1] h-full w-full -translate-x-2 translate-y-2 bg-rose-500" />
+        <div className="absolute z-10 h-full w-full -translate-x-2 translate-y-2 bg-rose-500" />
       )}
       <button
         className={`
-        p-4
-        px-6
-        font-medium
-        transition
-        ${fullWidth ? "w-full" : "w-fit"}
-        ${
-          outlined
-            ? "border border-black bg-white text-black hover:bg-gray-50 active:bg-gray-100"
-            : "bg-black text-white hover:bg-gray-900 active:bg-gray-800"
-        }
-        ${
-          disabled && outlined && "text-rose-500 hover:bg-white active:bg-white"
-        }
-        ${
-          disabled &&
-          !outlined &&
-          "bg-gray-700 text-gray-400 line-through hover:bg-gray-700 active:bg-gray-700"
-        }
+          relative
+          z-20
+          p-4
+          px-6
+          font-medium
+          transition
+          ${fullWidth ? "w-full" : "w-fit"}
+          ${
+            outlined
+              ? "border border-black bg-white text-black hover:bg-gray-50 active:bg-gray-100"
+              : "border border-black bg-black text-white hover:bg-gray-900 active:bg-gray-800"
+          }
+          ${
+            disabled &&
+            outlined &&
+            "text-rose-500 hover:bg-white active:bg-white"
+          }
+          ${
+            disabled &&
+            !outlined &&
+            "bg-gray-700 text-gray-400 line-through hover:bg-gray-700 active:bg-gray-700"
+          }
       `}
         disabled={disabled}
         onClick={action}

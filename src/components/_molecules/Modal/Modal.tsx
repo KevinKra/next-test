@@ -25,8 +25,8 @@ const Modal = ({ isOpen, onClose, children }: IModal) => {
   }
 
   return (
-    <div className="fixed top-0 z-50">
-      <div onClick={handleClose} className="h-screen w-screen bg-black/30" />
+    <div className="fixed top-0 z-40">
+      <div onClick={handleClose} className="h-screen w-screen bg-black/40" />
       <div
         className={`
           absolute
@@ -34,7 +34,6 @@ const Modal = ({ isOpen, onClose, children }: IModal) => {
           top-1/2
           z-20
           w-fit
-          max-w-[475px] 
           -translate-x-1/2
           overflow-hidden 
           shadow-lg
